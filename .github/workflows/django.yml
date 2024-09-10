@@ -25,5 +25,5 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        cd src/web_design/sample_site
+        cd src/web_design/sample_site/
         python manage.py test
