@@ -1,1 +1,0 @@
-../src/web_design/sample_site/vm_django/Scripts/deactivate
