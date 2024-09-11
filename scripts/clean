@@ -1,0 +1,2 @@
+find . -name '*.pyc' -type f -delete;
+echo "removed all pyc files"
