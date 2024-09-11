@@ -7,7 +7,8 @@ import logging
 
 def main():
     # Set up logging
-    logging.basicConfig(filename='manage.log', level=logging.INFO)
+    path = os.path.dirname(os.path.abspath(__file__))
+    logging.basicConfig(filename=path+'../../../../logs/manage.log', level=logging.INFO)
     logger.info('Starting manage.py')
     
     """Run administrative tasks."""
