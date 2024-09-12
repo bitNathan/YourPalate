@@ -13,3 +13,266 @@ INFO:__main__:Starting manage.py
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
 INFO:__main__:Exiting manage.py
 INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /initialApp
+WARNING:django.request:Not Found: /initialApp/
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render('initial.html')
+TypeError: render() missing 1 required positional argument: 'template_name'
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'initial.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: initial.html
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'initialApp/initial.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: initialApp/initial.html
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'initial.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: initial.html
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'initial.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: initial.html
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'initialApp/initial.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: initialApp/initial.html
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'Welcom to YourPalate')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: Welcom to YourPalate
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
