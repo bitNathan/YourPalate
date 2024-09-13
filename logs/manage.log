@@ -276,3 +276,210 @@ INFO:__main__:Starting manage.py
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
 INFO:__main__:Exiting manage.py
 INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /contact
+WARNING:django.request:Not Found: /projects
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /projects
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /quiz
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /quiz
+WARNING:django.request:Not Found: /restrictions
+WARNING:django.request:Not Found: /results
+WARNING:django.request:Not Found: /loading
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /intro.html
+WARNING:django.request:Not Found: /initialApp/quiz
+WARNING:django.request:Not Found: /initialApp/intro
+WARNING:django.request:Not Found: /initialApp/[name='intro']
+WARNING:django.request:Not Found: /initialApp/ [name='intro']
+WARNING:django.request:Not Found: /initialApp/ [name='intro']
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /intro.html
+WARNING:django.request:Not Found: /intro.html
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /initialApp/intro
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /loading
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /loading
+WARNING:django.request:Not Found: /loading
+WARNING:django.request:Not Found: /quiz
+WARNING:django.request:Not Found: /restrictions
+WARNING:django.request:Not Found: /intro
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /initialApp/
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /quiz
+WARNING:django.request:Not Found: /restrictions
+WARNING:django.request:Not Found: /loading
+WARNING:django.request:Not Found: /results
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /intro
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/intro/
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/quiz/initialApp/intro
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/quiz/initialApp/intro
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/results/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 16, in results
+    return render(request, 'results.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: results.html
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
