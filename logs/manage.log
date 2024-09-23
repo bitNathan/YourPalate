@@ -13,3 +13,868 @@ INFO:__main__:Starting manage.py
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
 INFO:__main__:Exiting manage.py
 INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /initialApp
+WARNING:django.request:Not Found: /initialApp/
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render('initial.html')
+TypeError: render() missing 1 required positional argument: 'template_name'
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'initial.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: initial.html
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'initialApp/initial.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: initialApp/initial.html
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'initial.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: initial.html
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'initial.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: initial.html
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'initialApp/initial.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: initialApp/initial.html
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 7, in index
+    return render(request, 'Welcom to YourPalate')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: Welcom to YourPalate
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /contact
+WARNING:django.request:Not Found: /projects
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /projects
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /quiz
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /quiz
+WARNING:django.request:Not Found: /restrictions
+WARNING:django.request:Not Found: /results
+WARNING:django.request:Not Found: /loading
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /intro.html
+WARNING:django.request:Not Found: /initialApp/quiz
+WARNING:django.request:Not Found: /initialApp/intro
+WARNING:django.request:Not Found: /initialApp/[name='intro']
+WARNING:django.request:Not Found: /initialApp/ [name='intro']
+WARNING:django.request:Not Found: /initialApp/ [name='intro']
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /intro.html
+WARNING:django.request:Not Found: /intro.html
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /initialApp/intro
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /loading
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /loading
+WARNING:django.request:Not Found: /loading
+WARNING:django.request:Not Found: /quiz
+WARNING:django.request:Not Found: /restrictions
+WARNING:django.request:Not Found: /intro
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /initialApp/
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /quiz
+WARNING:django.request:Not Found: /restrictions
+WARNING:django.request:Not Found: /loading
+WARNING:django.request:Not Found: /results
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /intro
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/intro/
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/urls.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /intro
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/quiz/initialApp/intro
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /initialApp/quiz/initialApp/intro
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /initialApp/results/
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/clear/49595/YourPalate/src/web_design/sample_site/initialApp/views.py", line 16, in results
+    return render(request, 'results.html')
+  File "/home/clear/.local/lib/python3.10/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: results.html
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /initialApp/
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '581a-128-210-106-50.ngrok-free.app'. You may need to add '581a-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '581a-128-210-106-50.ngrok-free.app'. You may need to add '581a-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '581a-128-210-106-50.ngrok-free.app'. You may need to add '581a-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '581a-128-210-106-50.ngrok-free.app'. You may need to add '581a-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /apple-touch-icon.png
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: 'c741-128-210-106-50.ngrok-free.app'. You may need to add 'c741-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'c741-128-210-106-50.ngrok-free.app'. You may need to add 'c741-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: 'c741-128-210-106-50.ngrok-free.app'. You may need to add 'c741-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'c741-128-210-106-50.ngrok-free.app'. You may need to add 'c741-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /favicon.ico
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /favicon.ico
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '6815-128-210-106-50.ngrok-free.app'. You may need to add '6815-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /apple-touch-icon.png
+WARNING:django.request:Not Found: /apple-touch-icon.png
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /apple-touch-icon-precomposed.png
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 141, in get_host
+    if domain and validate_host(domain, allowed_hosts):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 732, in validate_host
+    return any(
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 733, in <genexpr>
+    pattern == "*" or is_same_domain(host, pattern) for pattern in allowed_hosts
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/http.py", line 234, in is_same_domain
+    pattern = pattern.lower()
+AttributeError: 'list' object has no attribute 'lower'
+ERROR:django.request:Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 141, in get_host
+    if domain and validate_host(domain, allowed_hosts):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 732, in validate_host
+    return any(
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 733, in <genexpr>
+    pattern == "*" or is_same_domain(host, pattern) for pattern in allowed_hosts
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/http.py", line 234, in is_same_domain
+    pattern = pattern.lower()
+AttributeError: 'list' object has no attribute 'lower'
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /favicon.ico
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/clear/49595/YourPalate/src/web_design/sample_site/sample_site/settings.py changed, reloading.
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/clear/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/home/clear/.local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/clear/.local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4daa-128-210-106-50.ngrok-free.app'. You may need to add '4daa-128-210-106-50.ngrok-free.app' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /favicon.ico
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /favicon.ico
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
