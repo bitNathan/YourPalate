@@ -948,3 +948,8 @@ INFO:__main__:Starting manage.py
 INFO:__main__:Exiting manage.py
 INFO:__main__:Starting manage.py
 INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /fakeUrl
+INFO:__main__:Exiting manage.py
