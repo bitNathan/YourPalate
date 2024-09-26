@@ -878,3 +878,73 @@ WARNING:django.request:Not Found: /
 WARNING:django.request:Not Found: /favicon.ico
 INFO:__main__:Exiting manage.py
 INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Exiting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /favicon.ico
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /initialApp/
+WARNING:django.request:Not Found: /initialApp/
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /favicon.ico
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /initialApp/resultws/
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /initialApp/
+INFO:__main__:Starting manage.py
+WARNING:django.request:Not Found: /initialApp/
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
+INFO:__main__:Starting manage.py
+INFO:__main__:Exiting manage.py
