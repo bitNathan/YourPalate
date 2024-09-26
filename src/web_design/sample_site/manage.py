@@ -13,7 +13,7 @@ def main():
     if not os.path.exists(log_file):
         os.makedirs(os.path.dirname(log_file), exist_ok=True)
         with open(log_file, 'w'):
-            log_file.append('This log file was created automatically.\n')
+            pass
     logging.basicConfig(filename=log_file, level=logging.INFO)
     logger.info('Starting manage.py')
     
