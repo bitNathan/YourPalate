@@ -1,0 +1,4 @@
+[flake8]
+
+exclude = 
+    src/web_design/vm_django
