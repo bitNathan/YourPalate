@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'initialApp.apps.InitialappConfig',
+    'YourPalate.apps.YourPalateConfig',
+    "django_rename_app",
 ]
 
 MIDDLEWARE = [

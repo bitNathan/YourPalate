@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.shortcuts import render
 
 
-def intro(request):
-    return render(request, 'intro.html')
+def home(request):
+    return render(request, 'home.html')
 
 def quiz(request):
     return render(request, 'quiz.html')
@@ -17,3 +16,9 @@ def results(request):
 
 def loading(request):
     return render(request, 'loading.html')
+
+def signUp(request):
+    return render(request, 'signUp.html')
+
+def login(request):
+    return render(request, 'login.html')
