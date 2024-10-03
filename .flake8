@@ -1,4 +1,4 @@
 [flake8]
-
+max-line-length = 120
 exclude = 
     src/web_design/sample_site/vm_django
