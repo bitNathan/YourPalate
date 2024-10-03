@@ -8,7 +8,9 @@ import logging
 def main():
     # Set up logging
     path = os.path.dirname(os.path.abspath(__file__))
-    # create logs directory if it doesn't exist (needed for github actions)
+    
+    # create logs directory if it doesn't exist 
+    # (needed for github actions)
     log_file=path+'../../../../logs/manage.log'
     if not os.path.exists(log_file):
         os.makedirs(os.path.dirname(log_file), exist_ok=True)
