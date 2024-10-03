@@ -8,8 +8,8 @@ import logging
 def main():
     # Set up logging
     path = os.path.dirname(os.path.abspath(__file__))
-    
-    # create logs directory if it doesn't exist 
+
+    # create logs directory if it doesn't exist
     # (needed for github actions)
     log_file = path + '../../../../logs/manage.log'
     if not os.path.exists(log_file):
@@ -18,7 +18,7 @@ def main():
             pass
     logging.basicConfig(filename=log_file, level=logging.INFO)
     logger.info('Starting manage.py')
-    
+
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sample_site.settings")
     try:
