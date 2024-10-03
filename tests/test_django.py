@@ -44,6 +44,3 @@ class TestDjango(tc):
         client = Client()
         response = client.get("http://127.0.0.1:8000/fakeUrl")
         assert response.status_code == 404, "Did not return 404 for fake URL"
-
-if __name__ == '__main__':
-    test_django_connection()
