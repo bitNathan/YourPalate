@@ -1,4 +1,4 @@
 [flake8]
 
 exclude = 
-    src/web_design/vm_django
+    src/web_design/sample_site/vm_django
