@@ -1,0 +1,19 @@
+{% load static %} 
+<link rel="stylesheet" href="{% static 'styles/style.css' %}"> 
+<title>Home</title> 
+<center> 
+    <font size="6"> 
+                  
+<p> Welcome to YourPalate </p>
+    <img src="{% static 'images/logo.png' %}" width="225" height="225">   
+    <br><br>
+    <button onclick="location.href='/YourPalate/home/'" style="border-radius: 12px; padding: 10px 20px; background-color: #0015ff89; color: white; font-size: 16px;">
+        Login
+    </button>
+    <br><br>
+    <p style="font-size: 18px; color: #555;">Don't have an account yet?</p>
+    <button onclick="location.href='/YourPalate/signUp/'" style="border-radius: 12px; padding: 10px 20px; background-color: #f44336; color: white; font-size: 16px;">
+            Sign Up
+    </button>
+        </font> 
+    </center> 

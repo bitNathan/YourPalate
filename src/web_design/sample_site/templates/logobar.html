@@ -1,0 +1,15 @@
+{% load static %} 
+<link rel="stylesheet" href="{% static 'styles/style.css' %}"> 
+<logobar> 
+  <span style="font-size: 24px; display: block; text-align: center;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <img src="{% static 'images/logo.png' %}" width="75" height="75" style="margin-right: 10px;">
+      <span style="flex-grow: 1; text-align: center;">YourPalate</span>
+        <button onclick="location.href='/YourPalate/login/'" style="border-radius: 12px; padding: 10px 20px; background-color: #f44336; color: white; font-size: 16px;">
+            Log out
+        </button>
+    </div>
+  </span>
+  
+</logobar> 
+<hr>
