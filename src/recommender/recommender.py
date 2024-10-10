@@ -7,6 +7,7 @@ data.set_index(data.columns[0], inplace=True)
 
 knn = joblib.load('src/recommender/knn_subset_model.joblib')
 
+
 def get_n_recommendations(data, indices, n=10):
     similar_users = data.iloc[indices[0]]
     recipe_sums = similar_users.sum(axis=0)
@@ -16,13 +17,15 @@ def get_n_recommendations(data, indices, n=10):
 
     return recommendations
 
+
 def get_similar_users(knn, datapoint):
     distances, indices = knn.kneighbors([datapoint])
     return indices
+
 
 if __name__ == '__main__':
     user_id = 0
     datapoint = data.iloc[user_id]
     indices = get_similar_users(knn, datapoint)
     recommendations = get_n_recommendations(data, indices)
-    #print(recommendations)
+    # print(recommendations)
