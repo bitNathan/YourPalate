@@ -28,6 +28,13 @@ Change/ edit server_name to include Public IP address and Public IPv4 DNS. Save 
 
     sudo rm sample_site
     sudo ln -s /etc/nginx/sites-available/sample_site /etc/nginx/sites-enabled
+
+If file already exists error shows try below command line
+    
+    sudo rm /etc/nginx/sites-enabled/sample_site
+
+Initiate/ reinitiate nginx link
+
     sudo nginx -t
     sudo systemctl restart nginx
     cd ~/YourPalate/src/web_design/sample_site
