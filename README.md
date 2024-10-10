@@ -11,4 +11,31 @@
     - unauthorized fixed by using chmod +x "filename" (should be set up already but just in case)
 
 ##### [Django Tutorial Source](https://docs.djangoproject.com/en/5.0/intro/tutorial01/)
-    - This is what I used to set up the website, it's fairly simple.
+This is what I used to set up the website, it's fairly simple.
+
+### AWS connection steps
+Follow these steps to successfully link AWS instance:
+
+    cd ~/YourPalate/src/web_design/sample_site/sample_site
+    sudo nano settings.py
+
+Change/ edit allowed hosts list to include Public IP address and Public IPv4 DNS. Save and exit.
+
+    cd /etc/nginx/sites-available
+    sudo nano sample_site
+
+Change/ edit server_name to include Public IP address and Public IPv4 DNS. Save and exit.
+
+    sudo rm sample_site
+    sudo ln -s /etc/nginx/sites-available/sample_site /etc/nginx/sites-enabled
+    sudo nginx -t
+    sudo systemctl restart nginx
+    cd ~/YourPalate/src/web_design/sample_site
+    gunicorn --bind 0.0.0.0:8000 sample_site.wsgi:application
+
+Now run http address link for the Public IPv4 DNS with "/YourPalate/home/" attached at the end.
+For example: "http://ec2-18-223-133-155.us-east-2.compute.amazonaws.com/YourPalate/home/"
+
+
+
+    
