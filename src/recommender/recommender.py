@@ -38,5 +38,5 @@ if __name__ == '__main__':
     indices = get_similar_users(knn, datapoint)
     print("getting recommendations...")
     recommendations = get_n_recommendations(data, indices)
-    print("Recommendation sgenerated in %s seconds" % (time.time() - start_time))
+    print("Recommendations generated in %s seconds" % (time.time() - start_time))
     print(recommendations)
