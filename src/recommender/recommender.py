@@ -11,7 +11,7 @@ recipes = pd.read_csv(data_path / "RAW_recipes/RAW_recipes.csv")
 data = pd.read_csv(data_path / 'user_recipe_matrix_subset/user_recipe_matrix_subset.csv')
 data.set_index(data.columns[0], inplace=True)
 
-knn = joblib.load(project_root /'src/recommender/knn_subset_model.joblib')
+knn = joblib.load(project_root / 'src/recommender/knn_subset_model.joblib')
 
 
 def get_n_recommendations(data, indices, n=10):
