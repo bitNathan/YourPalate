@@ -1,1 +1,5 @@
 Django
+pandas
+pathlib
+pytz
+joblib
