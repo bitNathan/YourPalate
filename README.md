@@ -26,7 +26,7 @@ Change/ edit allowed hosts list to include Public IP address and Public IPv4 DNS
 
 Change/ edit server_name to include Public IP address and Public IPv4 DNS. Save and exit.
 
-    sudo rm sample_site
+    sudo rm /etc/nginx/sites-enabled/sample_site
     sudo ln -s /etc/nginx/sites-available/sample_site /etc/nginx/sites-enabled
 
 If file already exists error shows try below command line
