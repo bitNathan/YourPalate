@@ -13,9 +13,11 @@ def get_n_recommendations(data, indices, recipes, n=10):
 
     return recommendations
 
+
 def get_similar_users(knn, datapoint):
     distances, indices = knn.kneighbors([datapoint])
     return indices
+
 
 def run(user_id = 1):
     # Get the project root directory
@@ -27,21 +29,16 @@ def run(user_id = 1):
     data.set_index(data.columns[0], inplace=True)
 
     knn = joblib.load(project_root / 'src/recommender/knn_subset_model.joblib')
-    
+
     datapoint = data.iloc[user_id]
     indices = get_similar_users(knn, datapoint)
     recommendations = get_n_recommendations(data, indices, recipes)
     return recommendations
 
+
 if __name__ == '__main__':
-    setup_environment()
     start_time = time.time()
     print("Running the recommender...")
-    user_id = 1
-    datapoint = data.iloc[user_id]
-    print("getting similar users...")
-    indices = get_similar_users(knn, datapoint)
-    print("getting recommendations...")
-    recommendations = get_n_recommendations(data, indices)
+    recommendations = run()
     print("Recommendations generated in %s seconds" % (time.time() - start_time))
     print(recommendations)
