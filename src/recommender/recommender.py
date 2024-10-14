@@ -19,7 +19,7 @@ def get_similar_users(knn, datapoint):
     return indices
 
 
-def run(user_id = 1):
+def run(user_id=1):
     # Get the project root directory
     project_root = Path(__file__).parent.parent.parent
     data_path = project_root / "data"
