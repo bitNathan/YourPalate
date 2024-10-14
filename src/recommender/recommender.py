@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-# Recommender
-=======
 import joblib
 import pandas as pd
 from pathlib import Path
@@ -48,4 +45,3 @@ if __name__ == '__main__':
     recommendations = get_n_recommendations(data, indices)
     print("Recommendations generated in %s seconds" % (time.time() - start_time))
     print(recommendations)
->>>>>>> Stashed changes
