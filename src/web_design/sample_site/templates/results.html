@@ -6,9 +6,16 @@
         <center> 
             <font size="6"> 
                   
-<p> Here is your meal plan </p> 
+<p> Here are your Meals </p> 
 <font size="4"> 
-    <p> {{output}} </p>
+    <p>
+        {% for item in output %}
+            {{ item }} <br>
+        {% endfor %}
+    </p>
+    <p style="font-size: 18px; color: #555;">
+        (Example output only, recommender currently not run on AWS)
+    </p>
   
             </font> 
             <!-- <img src="{% static 'images/logo.png' %}" width="200" height="200"> 

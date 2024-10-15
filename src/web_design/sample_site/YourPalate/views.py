@@ -32,7 +32,12 @@ def restrictions(request):
 
 
 def results(request):
-    output = recommender_module.run().name.values
+    output = ['basic sourdough bread', 'berry smash muffins strawberry muffins', 
+              'breaded ranch or ranchero chicken', 'chewy macaroons', 
+              'christmas rum balls or bourbon balls', 'jello cake', 
+              'sourdough bread starter', 'sourdough bread also known as grandma angelitas bread', 
+              'sweet butternut squash', 'to die for crock pot roast']
+    
     return render(request, 'results.html', {'output': output})
 
 
