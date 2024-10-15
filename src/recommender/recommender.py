@@ -33,6 +33,7 @@ def run(user_id=1):
     datapoint = data.iloc[user_id]
     indices = get_similar_users(knn, datapoint)
     recommendations = get_n_recommendations(data, indices, recipes)
+    
     return recommendations
 
 
@@ -42,3 +43,4 @@ if __name__ == '__main__':
     recommendations = run()
     print("Recommendations generated in %s seconds" % (time.time() - start_time))
     print(recommendations)
+    # print(type(recommendations))
