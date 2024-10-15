@@ -6,11 +6,22 @@
         <center> 
             <font size="7"> 
                   
-<p> Dietary Restrictions </p>
+<label for="caloric_intake" style="font-size: 16px;">Dietary Restrictions:</label>
 <!-- restrictions drop down-->
 <select name="dietary_restrictions" style="font-size: 16px; padding: 10px; border-radius: 5px;">
   <option value="none">None</option>
   <option value="vegetarian">Vegetarian</option>
+</select>
+<br>
+
+<label for="caloric_intake" style="font-size: 16px;">Time Restrictions:</label>
+<!-- timing -->
+<select name="time_restrictions" style="font-size: 16px; padding: 10px; border-radius: 5px;">
+  <option value="none">None</option>
+  <option value="5_min">Less than 5 minutes</option>
+  <option value="20_min">Less than 20 minutes</option>
+  <option value="1_hour">Less than 1 hour</option>
+  <option value="more_1_hour">More than 1 hour</option>
 </select>
 
 <br>
@@ -20,7 +31,7 @@
 
 <br><br>
 
-<button style="border-radius: 12px; padding: 10px 20px; background-color: #0015ff89; color: white; font-size: 16px;">
+<button style="border-radius: 12px; padding: 10px 20px; background-color: #0015ff89; color: white; font-size: 16px;" onclick="alert('Changes submitted!');location.href='/YourPalate/restrictions/'">
   Submit Changes
 </button>
 <!-- text -->
