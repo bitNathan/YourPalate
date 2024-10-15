@@ -33,6 +33,9 @@ def run(user_id=1):
     datapoint = data.iloc[user_id]
     indices = get_similar_users(knn, datapoint)
     recommendations = get_n_recommendations(data, indices, recipes)
+
+    # TODO recommendations.name.values isn't comma seperated
+    #   could be fixed here or in views.py but needed for good display
     return recommendations
 
 
