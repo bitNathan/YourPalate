@@ -32,8 +32,10 @@ def restrictions(request):
 
 
 def results(request):
+
     # running the recommender
     output = recommender_module.run().name.values
+
     return render(request, 'results.html', {'output': output})
 
 
