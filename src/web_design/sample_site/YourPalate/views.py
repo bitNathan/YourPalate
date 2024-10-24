@@ -104,7 +104,7 @@ def signUp(request):
         if user.exists():
             # Display an information message if the username is taken
             messages.info(request, "Username already taken!")
-            return redirect('/register/')
+            return redirect('/YourPalate/signUp/')
 
         # Create a new User object with the provided information
         user = User.objects.create_user(
@@ -119,7 +119,7 @@ def signUp(request):
 
         # Display an information message indicating successful account creation
         messages.info(request, "Account created Successfully!")
-        return redirect('/signUp/')
+        return redirect('/YourPalate/signUp/')
 
     # Render the registration page template (GET request)
     return render(request, 'signUp.html')
