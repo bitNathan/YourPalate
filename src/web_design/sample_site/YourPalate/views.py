@@ -24,18 +24,22 @@ sys.modules[module_name] = recommender_module
 spec.loader.exec_module(recommender_module)
 
 
+@login_required(login_url='/YourPalate/login/')
 def home(request):
     return render(request, 'home.html')
 
 
+@login_required(login_url='/YourPalate/login/')
 def quiz(request):
     return render(request, 'quiz.html')
 
 
+@login_required(login_url='/YourPalate/login/')
 def restrictions(request):
     return render(request, 'restrictions.html')
 
 
+@login_required(login_url='/YourPalate/login/')
 def results(request):
 
     # running the recommender
@@ -44,6 +48,7 @@ def results(request):
     return render(request, 'results.html', {'output': output})
 
 
+@login_required(login_url='/YourPalate/login/')
 def loading(request):
     return render(request, 'loading.html')
 
@@ -54,13 +59,13 @@ https://www.geeksforgeeks.org/user-authentication-system-using-django/
 '''
 
 
-def login(request):
+def login_page(request):
     # Check if the HTTP request method is POST (form submission)
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
         # print("username: ", username)
-        
+
         # Check if a user with the provided username exists
         if not User.objects.filter(username=username).exists():
             # Display an error message if the username does not exist
@@ -70,7 +75,7 @@ def login(request):
         # Authenticate the user with the provided username and password
         user = authenticate(username=username, password=password)
         # print("user authenticated: ", user)
-        
+
         if user is None:
             # Display an error message if authentication fails (invalid password)
             messages.error(request, "Invalid Password")
@@ -78,14 +83,13 @@ def login(request):
         else:
             # print("about to login...")
             # Log in the user and redirect to the home page upon successful login
-            # TODO was in tutorial, but doesnt work (and is not needed?)
-            # login(request) 
+            login(request, user)
             return redirect('/YourPalate/home/')
 
     # Render the login page template (GET request)
     return render(request, 'login.html')
 
-# Define a view function for the registration page
+
 def signUp(request):
     # Check if the HTTP request method is POST (form submission)
     if request.method == 'POST':

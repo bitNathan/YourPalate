@@ -15,7 +15,7 @@ urlpatterns = [
     path("restrictions/", views.restrictions, name="restrictions"),
     path("quiz/", views.quiz, name="quiz"),
     path("results/", views.results, name="results"),
-    path("login/", views.login, name="login"),
+    path("login/", views.login_page, name="login"),
     path("signUp/", views.signUp, name="signUp"),
 ]
 
