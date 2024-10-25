@@ -1,49 +1,51 @@
 from unittest import TestCase as tc
 from django.urls import reverse
 from django.test import Client
+from django.contrib.auth.models import User
+
+# TODO all tests should result in failed login, unless
+# self.client.login(username=self.username, password=self.password)
 
 
 class TestDjango(tc):
 
-    def test_django_home(self):
-        # run_django_server()
+    def test_login_redirect(self):
         client = Client()
-        response = client.get(reverse("home"))
-        assert response.status_code == 200, "Failed to connect to Django server"
 
-    def test_django_quiz(self):
+        # Check if the user is redirected to the login page
+        response = client.get(reverse('home'))
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('login') + '?next=' + reverse('home'), 'response: ' + str(response))
+
+    def test_incorrect_login(self):
         client = Client()
-        response = client.get(reverse("quiz"))
-        assert response.status_code == 200, "Failed to connect to Django server"
 
-    def test_django_restrictions(self):
+        response = client.post(reverse('login'), {'username': 'wrong', 'password': 'fake'})
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('login'), 'response: ' + str(response))
+
+        # make sure we still get redirected
+        self.test_login_redirect()
+
+    # TODO test registration / signUp
+
+    def test_correct_login(self):
         client = Client()
-        response = client.get(reverse("restrictions"))
-        assert response.status_code == 200, "Failed to connect to Django server"
+        # Create a temporary user
+        self.username = 'test'
+        self.password = 'test'
+        User.objects.create_user(username=self.username, password=self.password)
 
-    # NOT TESTED: results runs model which requires data to be extracted from the zip
-    #    file which is not possible in the test environment
-    # def test_django_results(self):
-    #     client = Client()
-    #     response = client.get("http://127.0.0.1:8000/YourPalate/results/")
-    #     assert response.status_code == 200, "Failed to connect to Django server"
+        # Log in the temporary user
+        response = client.post(reverse('login'), {'username': 'test', 'password': 'test'})
 
-    def test_django_loading(self):
-        client = Client()
-        response = client.get(reverse("loading"))
-        assert response.status_code == 200, "Failed to connect to Django server"
+        # Check if the user is redirected to the home page
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('home'), 'response: ' + str(response))
 
-    def test_django_login(self):
-        client = Client()
-        response = client.get(reverse("login"))
-        assert response.status_code == 200, "Failed to connect to Django server"
+        # Remove the temporary user after the test
+        User.objects.filter(username=self.username).delete()
 
-    def test_django_signUp(self):
-        client = Client()
-        response = client.get(reverse("signUp"))
-        assert response.status_code == 200, "Failed to connect to Django server"
-
-    def test_fake_url(self):
-        client = Client()
-        response = client.get("http://127.0.0.1:8000/fakeUrl")
-        assert response.status_code == 404, "Did not return 404 for fake URL"
+        # TODO test other normal pages
