@@ -31,21 +31,62 @@ class TestDjango(tc):
 
     # TODO test registration / signUp
 
-    def test_correct_login(self):
+    def test_correct_login(self):  
         client = Client()
+        username = 'login_test_user'
+        password = 'login_test_password'
+        
+        # delete test user if it exists
+        User.objects.filter(username=username).delete()
+        
         # Create a temporary user
-        self.username = 'test'
-        self.password = 'test'
-        User.objects.create_user(username=self.username, password=self.password)
-
-        # Log in the temporary user
-        response = client.post(reverse('login'), {'username': 'test', 'password': 'test'})
-
+        User.objects.create_user(username=username, password=password)
+        
+        # test login
+        response = client.post(reverse('login'), {'username':username , 'password': password})
+        
+        # delete user
+        User.objects.filter(username=username).delete()
+        
         # Check if the user is redirected to the home page
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse('home'), 'response: ' + str(response))
 
-        # Remove the temporary user after the test
-        User.objects.filter(username=self.username).delete()
-
-        # TODO test other normal pages
+    def helper_page_access_after_login(self, page):
+        
+        client = Client()
+        username = str(page)+'_test_user'
+        password = str(page)+'_test_password'
+        
+        # delete test user if it exists
+        User.objects.filter(username=username).delete()
+        
+        # Create a temporary user
+        User.objects.create_user(username=username, password=password)
+        
+        # login
+        client.post(reverse('login'), {'username':username , 'password': password})
+        
+        # test page access
+        response = client.get(reverse(page))
+        assert response.status_code == 200, "Failed to connect to " + page + " page"
+        
+        # delete user
+        User.objects.filter(username=username).delete()
+    
+    def test_quiz_page_access_after_login(self):
+        self.helper_page_access_after_login('quiz')
+    
+    def test_home_page_access_after_login(self):
+        self.helper_page_access_after_login('home')
+        
+    # def test_results_page_access_after_login(self):
+    #     # TODO: runs recommender, takes time, needs data access, 
+    #     #   and recommemnder output to be tested
+    #     self.helper_page_access_after_login('results')
+    
+    def test_restrictions_page_access_after_login(self):
+        self.helper_page_access_after_login('restrictions')
+    
+    def test_loading_page_access_after_login(self):
+        self.helper_page_access_after_login('loading')
