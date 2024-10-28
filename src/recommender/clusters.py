@@ -1,9 +1,9 @@
 import pandas as pd
-from mlxtend.frequent_patterns import apriori, association_rules
 from sklearn.cluster import AgglomerativeClustering
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MultiLabelBinarizer
 from pathlib import Path
+from apriori import apriori
 
 
 def preprocess_tags(tags_column):
@@ -17,9 +17,19 @@ def create_transaction_matrix(tags_column):
     return transaction_matrix, mlb
 
 def apply_apriori(transaction_matrix, min_support=0.05):
-    # Use the Apriori algorithm to find frequent itemsets (tag combinations).
-    frequent_itemsets = apriori(transaction_matrix, min_support=min_support, use_colnames=True)
-    return frequent_itemsets
+    # Convert transaction matrix to list of sets for custom Apriori function compatibility
+    dataset = [set(transaction_matrix.columns[transaction_matrix.iloc[i].values == 1]) for i in range(len(transaction_matrix))]
+    
+    # Use the custom Apriori function to find frequent itemsets
+    frequent_itemsets, support_data = apriori(dataset, min_support=min_support, verbose=False)
+    
+    # Convert results to DataFrame format expected by the rest of the code
+    frequent_itemsets_df = pd.DataFrame({
+        'itemsets': [set(itemset) for itemset in frequent_itemsets],
+        'support': [support_data[itemset] for itemset in frequent_itemsets]
+    })
+    
+    return frequent_itemsets_df
 
 def cluster_recipes_by_tags(frequent_itemsets, transaction_matrix, min_common_tags=5):
     # Find frequent tagsets and cluster recipes based on those patterns.
@@ -42,25 +52,28 @@ def run_apriori_clustering(min_support=0.05, min_common_tags=5):
     # Load the recipes dataset
     recipes_path = data_path / "RAW_recipes/RAW_recipes.csv" 
     recipes = pd.read_csv(recipes_path)
-    print("data done")
+    print("Data loaded.")
+    
     # Step 1: Preprocess the tags
     recipes['clean_tags'] = preprocess_tags(recipes['tags'])
-    
-    print("clesned")
+    print("Tags preprocessed.")
 
     # Step 2: Create a transaction matrix for Apriori
     transaction_matrix, mlb = create_transaction_matrix(recipes['clean_tags'])
-    print("creatred matrix")
+    print("Transaction matrix created.")
 
     # Step 3: Apply Apriori algorithm to find frequent tag patterns
     frequent_itemsets = apply_apriori(transaction_matrix, min_support=min_support)
-    print("frequent itemsets")
+    print("Frequent itemsets found.")
+    
     # Step 4: Cluster recipes based on common tag patterns
     recipe_clusters = cluster_recipes_by_tags(frequent_itemsets, transaction_matrix, min_common_tags)
-    print("clustered")
+    print("Recipes clustered.")
+    
     # Step 5: Add cluster labels to the dataframe
     recipes['cluster'] = [','.join(map(str, cluster)) for cluster in recipe_clusters]
-    print("added cluster")
+    print("Clusters added to DataFrame.")
+    
     # Return the clustered recipes
     return recipes[['name', 'tags', 'cluster']]
 
