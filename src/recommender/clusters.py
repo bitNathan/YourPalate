@@ -42,25 +42,28 @@ def run_apriori_clustering(min_support=0.05, min_common_tags=5):
     # Load the recipes dataset
     recipes_path = data_path / "RAW_recipes/RAW_recipes.csv" 
     recipes = pd.read_csv(recipes_path)
-
+    print("data done")
     # Step 1: Preprocess the tags
     recipes['clean_tags'] = preprocess_tags(recipes['tags'])
+    
+    print("clesned")
 
     # Step 2: Create a transaction matrix for Apriori
     transaction_matrix, mlb = create_transaction_matrix(recipes['clean_tags'])
+    print("creatred matrix")
 
     # Step 3: Apply Apriori algorithm to find frequent tag patterns
     frequent_itemsets = apply_apriori(transaction_matrix, min_support=min_support)
-
+    print("frequent itemsets")
     # Step 4: Cluster recipes based on common tag patterns
     recipe_clusters = cluster_recipes_by_tags(frequent_itemsets, transaction_matrix, min_common_tags)
-
+    print("clustered")
     # Step 5: Add cluster labels to the dataframe
     recipes['cluster'] = [','.join(map(str, cluster)) for cluster in recipe_clusters]
-    
+    print("added cluster")
     # Return the clustered recipes
     return recipes[['name', 'tags', 'cluster']]
 
 if __name__ == '__main__':
-    clustered_recipes = run_apriori_clustering(min_support=0.05, min_common_tags=5)
+    clustered_recipes = run_apriori_clustering(min_support=0.05, min_common_tags=10)
     print(clustered_recipes.head())
