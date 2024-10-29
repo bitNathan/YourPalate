@@ -1,0 +1,42 @@
+name: AWS Deployment
+on:
+  push:
+  # only run on approved PR
+  pull_request:
+    branches:
+    - auto-aws-deployment
+    types:
+    - closed
+
+jobs:
+  deploy:
+    # only runs when new code is merged, not when PR is raised
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    env:
+        AWS_PEM: |
+          ${{secrets.AWS_NATHAN_PEM}}
+        AWS_NAME: ${{secrets.AWS_DNS}}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+  
+      - name: deploy code
+        run: |
+          # EOF gives warning, but necessary for pem to be interpreted right
+          echo $AWS_PEM > aws_pem.pem << EOF
+          chmod 400 aws_pem.pem
+          ssh -q -o StrictHostKeyChecking=no -i aws_pem.pem ubuntu@$AWS_NAME
+
+          # TODO install nvm and nginx
+          # TODO configure runfiles
+          
+          # pull
+          cd ~/YourPalate
+          git checkout auto-aws-deployment
+          git pull
+
+          # restart nginx
+          sudo systemctl restart nginx
+          sudo nginx -t
