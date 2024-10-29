@@ -11,7 +11,7 @@ on:
 jobs:
   deploy:
     # only runs when new code is merged, not when PR is raised
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
         AWS_PEM: |
@@ -40,3 +40,10 @@ jobs:
           # restart nginx
           sudo systemctl restart nginx
           sudo nginx -t
+    
+  not_merged:
+    if: github.event.pull_request.merged == false
+    runs-on: ubuntu-latest
+    steps:
+     - name: message
+       run: echo "Job skipped as PR not merged yet"
