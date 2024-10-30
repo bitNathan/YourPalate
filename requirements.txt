@@ -3,5 +3,5 @@ pandas
 pathlib
 pytz
 joblib
-docker
 scikit-learn
+gunicorn
