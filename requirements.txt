@@ -4,4 +4,3 @@ pathlib
 pytz
 joblib
 scikit-learn
-gunicorn
