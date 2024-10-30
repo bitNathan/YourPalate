@@ -38,18 +38,20 @@ def apriori(dataset, min_support=0.5, verbose=False):
     F1, support_data = get_freq(D, C1, min_support, verbose=False) # get frequent 1-itemsets
     F = [F1] # list of frequent itemsets; initialized to frequent 1-itemsets
     k = 2 # the itemset cardinality
-    while (len(F[k - 2]) > 0):
+    while k <= 5 and (len(F[k - 2]) > 0):
         Ck = apriori_gen(F[k-2], k) # generate candidate itemsets
         Fk, supK  = get_freq(D, Ck, min_support) # get frequent itemsets
-        support_data.update(supK)# update the support counts to reflect pruning
+        support_data.update(supK) # update the support counts to reflect pruning
         F.append(Fk)  # add the frequent k-itemsets to the list of frequent itemsets
         k += 1
+        
+    five_item_frequent_sets = [itemset for itemset in F[4] if len(itemset) == 5]
 
-    if verbose:
-        # Print a list of all the frequent itemsets.
-        for kset in F:
-            for item in kset:
-                print(""                     + "{"                     + "".join(str(i) + ", " for i in iter(item)).rstrip(', ')                     + "}"                     + ":  sup = " + str(round(support_data[item], 3)))
+    # if verbose:
+    #     # Print a list of all the frequent itemsets.
+    #     for kset in F:
+    #         for item in kset:
+    #             print(""                     + "{"                     + "".join(str(i) + ", " for i in iter(item)).rstrip(', ')                     + "}"                     + ":  sup = " + str(round(support_data[item], 3)))
         
         # # Print statements for report answers
         # for i in range(2, len(F)):
@@ -67,8 +69,12 @@ def apriori(dataset, min_support=0.5, verbose=False):
         #     print(f"".format(i-1) + ", ".join("{" + ", ".join(sorted(item)) + "}" for item in F[i - 2]))
         #     print()
 
+    if verbose:
+        print("Frequent 5-itemsets:")
+        for item in five_item_frequent_sets:
+            print(f"{item}: support = {support_data[item]}")
                 
-    return F, support_data
+    return five_item_frequent_sets, support_data
 
 def create_candidates(dataset, verbose=False):
     """Creates a list of candidate 1-itemsets from a list of transactions.
@@ -129,18 +135,19 @@ def get_freq(dataset, candidates, min_support, verbose=False):
     for transaction in dataset:
         for candidate in candidates:
             if candidate.issubset(transaction):
-                if candidate not in support_count:
-                    support_count[candidate] = 1
+                support_count[candidate] = support_count.get(candidate, 0) + 1
+                # if candidate not in support_count:
+                #     support_count[candidate] = 1
                 
-                else:
-                    support_count[candidate] += 1
+                # else:
+                #     support_count[candidate] += 1
 
     num_items = float(len(dataset))
     freq_list = []
     support_data = {}
     
-    for candidate in support_count:
-        support = support_count[candidate] / num_items
+    for candidate, count in support_count.items():
+        support = count / num_items
         
         if support >= min_support:
             freq_list.append(candidate)
@@ -174,7 +181,7 @@ def apriori_gen(freq_sets, k):
     """
     candidate_list = []
     len_freq_sets = len(freq_sets)
-    
+    print(len_freq_sets)
     for i in range(len_freq_sets):
         for j in range(i + 1, len_freq_sets):
             L1 = list(freq_sets[i])[: k - 2]
@@ -193,7 +200,6 @@ def apriori_gen(freq_sets, k):
                     candidate_list.append(candidate)
 
     return candidate_list
-
 
 def loadDataSet(fileName, delim=','):
     fr = open(fileName)

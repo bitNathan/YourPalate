@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import MultiLabelBinarizer
 from pathlib import Path
 from apriori import apriori
+from itertools import combinations
 
 
 def preprocess_tags(tags_column):
@@ -17,33 +18,36 @@ def create_transaction_matrix(tags_column):
     return transaction_matrix, mlb
 
 def apply_apriori(transaction_matrix, min_support=0.05):
-    # Convert transaction matrix to list of sets for custom Apriori function compatibility
+    # Convert transaction matrix to a list of sets for compatibility with the custom Apriori function
     dataset = [set(transaction_matrix.columns[transaction_matrix.iloc[i].values == 1]) for i in range(len(transaction_matrix))]
     
     # Use the custom Apriori function to find frequent itemsets
-    frequent_itemsets, support_data = apriori(dataset, min_support=min_support, verbose=False)
+    five_item_frequent_sets, support_data = apriori(dataset, min_support=min_support, verbose=False)
     
-    # Convert results to DataFrame format expected by the rest of the code
     frequent_itemsets_df = pd.DataFrame({
-        'itemsets': [set(itemset) for itemset in frequent_itemsets],
-        'support': [support_data[itemset] for itemset in frequent_itemsets]
+        'itemsets': five_item_frequent_sets,
+        'support': [support_data[itemset] for itemset in five_item_frequent_sets]
     })
-    
+     
     return frequent_itemsets_df
+
 
 def cluster_recipes_by_tags(frequent_itemsets, transaction_matrix, min_common_tags=5):
     # Find frequent tagsets and cluster recipes based on those patterns.
-    frequent_tagsets = frequent_itemsets[frequent_itemsets['itemsets'].apply(lambda x: len(x) >= min_common_tags)]
+    frequent_tagsets = [set(itemset) for itemset in frequent_itemsets['itemsets'] if len(itemset) == min_common_tags]
     
     # For each recipe, calculate which frequent tagsets they belong to.
     recipe_clusters = []
     for i, recipe_tags in transaction_matrix.iterrows():
-        clusters = []
-        for idx, itemset in enumerate(frequent_tagsets['itemsets']):
-            if all(tag in recipe_tags[recipe_tags == 1].index for tag in itemset):
-                clusters.append(idx)
-        recipe_clusters.append(clusters if clusters else [-1])  # Assign -1 if no cluster matches
-    
+        # Convert active tags in the recipe to a set
+        active_tags = set(recipe_tags[recipe_tags == 1].index)
+        
+        # Find matching clusters for the recipe based on frequent 5-tag sets
+        clusters = [idx for idx, itemset in enumerate(frequent_tagsets) if itemset.issubset(active_tags)]
+        
+        # Append cluster indices or [-1] if no matches found
+        recipe_clusters.append(clusters if clusters else [-1])
+        
     return recipe_clusters
 
 def run_apriori_clustering(min_support=0.05, min_common_tags=5):
@@ -78,5 +82,5 @@ def run_apriori_clustering(min_support=0.05, min_common_tags=5):
     return recipes[['name', 'tags', 'cluster']]
 
 if __name__ == '__main__':
-    clustered_recipes = run_apriori_clustering(min_support=0.05, min_common_tags=10)
+    clustered_recipes = run_apriori_clustering(min_support=0.05, min_common_tags=5)
     print(clustered_recipes.head())
