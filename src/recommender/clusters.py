@@ -78,6 +78,41 @@ def run_apriori_clustering(min_support=0.05, min_common_tags=5):
     recipes['cluster'] = [','.join(map(str, cluster)) for cluster in recipe_clusters]
     print("Clusters added to DataFrame.")
     
+    cluster_counts = recipes['cluster'].value_counts()
+    stats_summary = pd.DataFrame({
+        'Cluster ID': cluster_counts.index,
+        'Recipe Count': cluster_counts.values
+    })
+    
+    # Calculate additional metrics
+    mean_count = cluster_counts.mean()
+    median_count = cluster_counts.median()
+    min_count = cluster_counts.min()
+    max_count = cluster_counts.max()
+    
+    # Display statistics summary and additional metrics
+    print("\nCluster Length Statistics:")
+    print(stats_summary)
+    print("\nAdditional Cluster Size Metrics:")
+    print(f"Mean Recipe Count per Cluster: {mean_count}")
+    print(f"Median Recipe Count per Cluster: {median_count}")
+    print(f"Minimum Recipe Count in a Cluster: {min_count}")
+    print(f"Maximum Recipe Count in a Cluster: {max_count}")
+    
+    # Step 6: Save each cluster's recipes to a separate CSV file with complete recipe information
+    unique_clusters = set(recipes['cluster'])
+    print(len(unique_clusters))
+    ct = 1
+    for cluster_id in unique_clusters:
+        cluster_recipes = recipes[recipes['cluster'] == cluster_id]  # Select recipes for this cluster
+        if len(cluster_recipes) >= 100:
+            cluster_file = data_path / f"cluster_{ct}.csv"
+            cluster_recipes.to_csv(cluster_file, index=False)  # Save with full recipe info
+            print(f"Made file {cluster_file}")
+            ct += 1
+    
+    print("Count: ", ct)
+    
     # Return the clustered recipes
     return recipes[['name', 'tags', 'cluster']]
 
