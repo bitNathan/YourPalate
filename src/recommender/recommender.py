@@ -3,8 +3,6 @@ import pandas as pd
 from pathlib import Path
 import time
 
-# from web_design.sample_site import 
-
 
 def get_n_recommendations(data, indices, recipes, n=10):
     similar_users = data.iloc[indices[0]]
@@ -28,13 +26,13 @@ def run(user_id=1):
     data_path = project_root / "data"
 
     print("here")
-    
+
     recipes = pd.read_csv(data_path / "RAW_recipes/RAW_recipes.csv")
-    
+
     print("here2")
-    
+
     data = pd.read_csv(data_path / 'user_recipe_matrix_subset/user_recipe_matrix_subset.csv')
-    
+
     print("here3")
     sparse_df = data.astype(pd.SparseDtype("int", 0))
     print("here4")
@@ -49,7 +47,6 @@ def run(user_id=1):
     print("here7")
 
     feature_columns = sparse_df.columns
-    
     datapoint = sparse_df.iloc[user_id]
     print("here8")
 
