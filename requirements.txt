@@ -3,3 +3,4 @@ pandas
 pathlib
 pytz
 joblib
+scikit-learn
