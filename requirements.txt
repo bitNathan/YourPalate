@@ -4,3 +4,4 @@ pathlib
 pytz
 joblib
 mlxtend
+scikit-learn
