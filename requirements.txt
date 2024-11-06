@@ -3,3 +3,5 @@ pandas
 pathlib
 pytz
 joblib
+mlxtend
+scikit-learn
