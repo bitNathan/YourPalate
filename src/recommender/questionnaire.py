@@ -28,9 +28,9 @@ def get_random_recipes_from_groups(groups, num_recipes=5):
     return selected_recipes
 
 
-def get_recipes_for_review(groups, group_weights, num_recipes=20):
+def get_recipes_for_review(groups, group_weights=None, num_recipes=20):
     min_weight = 0.1
-    group_weights = {group: max(weight, min_weight) for group, weight in group_weights.items()}
+    group_weights = {group: 1.0 for group in groups.keys()} if group_weights is None else group_weights
 
     total_weight = sum(group_weights.values())
     normalized_weights = {group: weight / total_weight for group, weight in group_weights.items()}
