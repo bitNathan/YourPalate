@@ -5,3 +5,4 @@ pytz
 joblib
 mlxtend
 scikit-learn
+pandas
