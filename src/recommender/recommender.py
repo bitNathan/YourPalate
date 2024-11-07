@@ -2,68 +2,93 @@ import joblib
 import pandas as pd
 from pathlib import Path
 import time
+import json
 
-
-def get_n_recommendations(data, indices, recipes, n=10):
-    similar_users = data.iloc[indices[0]]
-    recipe_sums = similar_users.sum(axis=0)
-    top_recipes = recipe_sums.sort_values(ascending=False)[:n]
-    top_recipes_indices = top_recipes.index.values.astype(int)
-    recommendations = recipes[recipes['id'].isin(top_recipes_indices)]
-
-    return recommendations
-
-
-def get_similar_users(knn, datapoint, features):
-    datapoint_dense = pd.DataFrame([datapoint.sparse.to_dense().values], columns=features)
-    _, indices = knn.kneighbors(datapoint_dense)
-    return indices
-
-
-def run(user_id=1):
-    # Get the project root directory
+def load_recipe_ratings():
     project_root = Path(__file__).parent.parent.parent
     data_path = project_root / "data"
+    optimized_ratings_path = data_path / "user_ratings.csv"
+    
+    # Load optimized ratings and convert JSON strings back to dictionaries
+    ratings = pd.read_csv(optimized_ratings_path)
+    ratings['user_ratings'] = ratings['user_ratings'].apply(json.loads)
+    return ratings
 
-    print("here")
+def create_user_matrix(ratings):
+    # Expand user ratings into a sparse user matrix format
+    user_data = []
+    for _, row in ratings.iterrows():
+        recipe_id = row['recipe_id']
+        for user_id, rating in row['user_ratings'].items():
+            user_data.append((user_id, recipe_id, rating))
+    user_matrix_df = pd.DataFrame(user_data, columns=['user_id', 'recipe_id', 'rating'])
+    user_matrix = user_matrix_df.pivot(index='user_id', columns='recipe_id', values='rating').fillna(0)
+    return user_matrix
 
-    recipes = pd.read_csv(data_path / "RAW_recipes/RAW_recipes.csv")
+def get_similar_users(knn, user_matrix, user_id, n_neighbors=5):
+    # Create user vector with ratings in the same format as the KNN model
+    if str(user_id) not in user_matrix.index:
+        raise ValueError(f"User ID {user_id} not found in user ratings.")
+    
+    user_vector = user_matrix.loc[[str(user_id)]]
 
-    print("here2")
+    # Find similar users
+    distances, indices = knn.kneighbors(user_vector, n_neighbors=n_neighbors)
+    similar_user_ids = [user_matrix.index[i] for i in indices[0]]
+    return similar_user_ids
 
-    data = pd.read_csv(data_path / 'user_recipe_matrix_subset/user_recipe_matrix_subset.csv')
+def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=10):
+    # Aggregate ratings from similar users and find the top recipes
+    recipe_scores = {}
 
-    print("here3")
-    sparse_df = data.astype(pd.SparseDtype("int", 0))
-    print("here4")
+    for _, row in ratings.iterrows():
+        user_ratings = row['user_ratings']
+        
+        # Sum ratings of similar users for each recipe
+        for user_id in similar_user_ids:
+            if str(user_id) in user_ratings:
+                recipe_scores[row['recipe_id']] = recipe_scores.get(row['recipe_id'], 0) + user_ratings[str(user_id)]
 
-    # sparse_df.to_csv(data_path / 'sparse_user_recipe_matrix.csv')
-    print("here5")
+    # Sort recipes by aggregated score and get the top N
+    top_recipes = sorted(recipe_scores.items(), key=lambda x: x[1], reverse=True)[:n]
+    recommended_recipes = [recipe for recipe, _ in top_recipes]
+    
+    return recommended_recipes
 
-    sparse_df.set_index(sparse_df.columns[0], inplace=True)
-    print("here6")
+def run(user_id=23333, n_neighbors=5):
+    project_root = Path(__file__).parent.parent.parent
 
+    # Load optimized recipe ratings
+    print("Loading optimized recipe ratings...")
+    ratings = load_recipe_ratings()
+
+    # Create a sparse user matrix for KNN input
+    print("Creating user matrix...")
+    user_matrix = create_user_matrix(ratings)
+
+    # Load the KNN model
+    print("Loading KNN model...")
     knn = joblib.load(project_root / 'src/recommender/knn_subset_model.joblib')
-    print("here7")
+    
+    # Find similar users
+    print("Finding similar users...")
+    similar_user_ids = get_similar_users(knn, user_matrix, user_id, n_neighbors)
+    print("Similar users:", similar_user_ids)
 
-    feature_columns = sparse_df.columns
-    datapoint = sparse_df.iloc[user_id]
-    print("here8")
+    # Generate recommendations based on similar users
+    print("Generating recommendations...")
+    recommendations = get_top_recipes_from_similar_users(ratings, similar_user_ids)
 
-    indices = get_similar_users(knn, datapoint, feature_columns)
-    print("here9")
+    # Convert recommendation list to comma-separated format for display
+    recommendations_list = ", ".join(map(str, recommendations))
 
-    recommendations = get_n_recommendations(sparse_df, indices, recipes)
-    print("here10")
-
-    # TODO recommendations.name.values isn't comma seperated
-    #   could be fixed here or in views.py but needed for good display
-    return recommendations
+    return similar_user_ids, recommendations_list
 
 
 if __name__ == '__main__':
     start_time = time.time()
     print("Running the recommender...")
-    recommendations = run()
+    similar_users, recommendations = run(user_id=23333)
     print("Recommendations generated in %s seconds" % (time.time() - start_time))
-    print(recommendations)
+    print("Similar users:", similar_users)
+    print("Recommended recipes:", recommendations)
