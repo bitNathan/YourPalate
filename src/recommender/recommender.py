@@ -4,17 +4,19 @@ from pathlib import Path
 import time
 import json
 
+
 def load_recipe_ratings():
     project_root = Path(__file__).parent.parent.parent
     data_path = project_root / "data"
     optimized_ratings_path = data_path / "user_ratings.csv"
-    
+
     # Load optimized ratings and convert JSON strings back to dictionaries
     ratings = pd.read_csv(optimized_ratings_path)
     ratings['user_ratings'] = ratings['user_ratings'].apply(json.loads)
     return ratings
 
-def create_user_matrix(ratings):
+
+def create_user_matrix(ratings, expected_features=None):
     # Expand user ratings into a sparse user matrix format
     user_data = []
     for _, row in ratings.iterrows():
@@ -23,13 +25,23 @@ def create_user_matrix(ratings):
             user_data.append((user_id, recipe_id, rating))
     user_matrix_df = pd.DataFrame(user_data, columns=['user_id', 'recipe_id', 'rating'])
     user_matrix = user_matrix_df.pivot(index='user_id', columns='recipe_id', values='rating').fillna(0)
+
+    # If expected features (recipes) are provided, align the matrix columns
+    if expected_features is not None:
+        missing_features = set(expected_features) - set(user_matrix.columns)
+        for feature in missing_features:
+            user_matrix[feature] = 0  # Add missing features with 0 ratings
+        user_matrix = user_matrix[expected_features]  # Reorder columns to match expected features
+
     return user_matrix
 
+
 def get_similar_users(knn, user_matrix, user_id, n_neighbors=5):
-    # Create user vector with ratings in the same format as the KNN model
+    # Ensure the user_id exists in the matrix
     if str(user_id) not in user_matrix.index:
         raise ValueError(f"User ID {user_id} not found in user ratings.")
-    
+
+    # Get the user's ratings vector
     user_vector = user_matrix.loc[[str(user_id)]]
 
     # Find similar users
@@ -37,13 +49,14 @@ def get_similar_users(knn, user_matrix, user_id, n_neighbors=5):
     similar_user_ids = [user_matrix.index[i] for i in indices[0]]
     return similar_user_ids
 
+
 def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=10):
     # Aggregate ratings from similar users and find the top recipes
     recipe_scores = {}
 
     for _, row in ratings.iterrows():
         user_ratings = row['user_ratings']
-        
+
         # Sum ratings of similar users for each recipe
         for user_id in similar_user_ids:
             if str(user_id) in user_ratings:
@@ -52,8 +65,9 @@ def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=10):
     # Sort recipes by aggregated score and get the top N
     top_recipes = sorted(recipe_scores.items(), key=lambda x: x[1], reverse=True)[:n]
     recommended_recipes = [recipe for recipe, _ in top_recipes]
-    
+
     return recommended_recipes
+
 
 def run(user_id=23333, n_neighbors=5):
     project_root = Path(__file__).parent.parent.parent
@@ -62,14 +76,15 @@ def run(user_id=23333, n_neighbors=5):
     print("Loading optimized recipe ratings...")
     ratings = load_recipe_ratings()
 
-    # Create a sparse user matrix for KNN input
-    print("Creating user matrix...")
-    user_matrix = create_user_matrix(ratings)
-
     # Load the KNN model
     print("Loading KNN model...")
     knn = joblib.load(project_root / 'src/recommender/knn_subset_model.joblib')
-    
+
+    # Retrieve expected features from the KNN model and create user matrix
+    print("Creating user matrix...")
+    expected_features = knn.get_feature_names_out() if hasattr(knn, 'get_feature_names_out') else knn.feature_names_in_
+    user_matrix = create_user_matrix(ratings, expected_features)
+
     # Find similar users
     print("Finding similar users...")
     similar_user_ids = get_similar_users(knn, user_matrix, user_id, n_neighbors)
