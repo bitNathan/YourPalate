@@ -59,23 +59,9 @@ def get_recipes_for_review(groups, group_weights, num_recipes=20):
     return {'selected_recipes_per_group': selected_recipes, 'all_selected_recipes': all_selected_recipes}
 
 
-def update_user_preferences(group_weights, selected_recipes, likes, dislikes, like_weight=1.2, dislike_weight=0.8):
-    """
-    Updates group weights based on user feedback from likes and dislikes lists.
-
-    Parameters:
-    - group_weights (dict): Current weights for each group.
-    - selected_recipes (dict): Recipes shown per group in the last round.
-    - likes (list): List of recipe IDs the user liked.
-    - dislikes (list): List of recipe IDs the user disliked.
-    - like_weight (float): Multiplier to increase weight for liked groups.
-    - dislike_weight (float): Multiplier to decrease weight for disliked groups.
-
-    Returns:
-    - tuple: (Updated group weights, User recipe rating data)
-    """
+def update_user_preferences(group_weights, selected_recipes, likes, dislikes, like_weight=1.2, dislike_weight=0.8, user_ratings=None):
     # Initialize a dictionary to store the user's recipe ratings
-    user_ratings = {}
+    user_ratings = {} if user_ratings is None else user_ratings
 
     # Track likes and dislikes per group
     for group, recipes in selected_recipes['selected_recipes_per_group'].items():
