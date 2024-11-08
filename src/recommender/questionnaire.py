@@ -50,7 +50,7 @@ def get_recipes_for_review(groups, group_weights=None, num_recipes=20):
         if groups[selected_group]:
             recipe = random.choice(groups[selected_group])
             selected_recipes[selected_group].append(recipe['id'])
-            all_selected_recipes.append({'id': recipe['id'], 'name': recipe['name']})  # Store only ID and name
+            all_selected_recipes.append({'id': recipe['id'], 'name': recipe['name'], 'description': recipe['description']})  # Store only ID and name
 
     # print("Recipes selected per group:")
     # for group, recipe_ids in selected_recipes.items():
@@ -92,7 +92,7 @@ def update_user_preferences(group_weights, selected_recipes, likes, dislikes,
 
 
 def run_questionnaire(data_path, num_recipes=10):
-    recipes = pd.read_csv(data_path)[["name", "id", "cluster"]]
+    recipes = pd.read_csv(data_path)[["name", "id", "cluster", "description"]]
     groups = group_recipes(recipes, "cluster")
     group_weights = {group: 1.0 for group in groups.keys()}
     # print("Initial group weights:")
@@ -112,7 +112,8 @@ if __name__ == "__main__":
 
     selected_recipe_ids, group_weights, selected_recipes = run_questionnaire(os.path.join(
         path, "data/filtered_recipes_clustered.csv"))
-    print("\nSelected recipes:", selected_recipes)
+    
+    print("\nSelected recipes:", selected_recipes['all_selected_recipes'])
     # print(selected_recipes)
     likes = random.sample(selected_recipe_ids, k=3)
     remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]

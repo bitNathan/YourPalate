@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-import pandas as pd
+# import pandas as pd
 
 # from authentication tutorial
 # https://www.geeksforgeeks.org/user-authentication-system-using-django/
@@ -41,12 +41,15 @@ def home(request):
 def quiz(request):
     # getting recipes to be rated
     path = Path(__file__).resolve().parent.parent.parent.parent.parent
-
-    recipes = pd.read_csv(os.path.join(path, "data/filtered_recipes_clustered.csv"))["name", "id", "cluster"]
+    selected_recipe_ids, group_weights, selected_recipes = questionnaire_module.run_questionnaire(
+        os.path.join(path, "data/filtered_recipes_clustered.csv"))
     # groups = group_recipes(recipes, "cluster")
-    output = recipes.values
-
-    return render(request, 'quiz.html', {'output': output})
+    
+    # TODO output all lowercase, would be ncie to uppercase some words
+    recipes = []
+    for recipe in selected_recipes['all_selected_recipes']:
+        recipes.append([recipe['name'], recipe['description']])
+    return render(request, 'quiz.html', {'recipes':recipes})
 
 
 @login_required(login_url='/YourPalate/login/')
