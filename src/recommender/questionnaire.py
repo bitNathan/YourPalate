@@ -1,5 +1,7 @@
-# import pandas as pd
+import pandas as pd
 import random
+from pathlib import Path
+import os
 
 
 def filter_recipes(recipes, is_vegetarian=None, max_calories=None, max_time=None):
@@ -29,7 +31,7 @@ def get_random_recipes_from_groups(groups, num_recipes=5):
 
 
 def get_recipes_for_review(groups, group_weights=None, num_recipes=20):
-    min_weight = 0.1
+    # min_weight = 0.1
     group_weights = {group: 1.0 for group in groups.keys()} if group_weights is None else group_weights
 
     total_weight = sum(group_weights.values())
@@ -59,7 +61,8 @@ def get_recipes_for_review(groups, group_weights=None, num_recipes=20):
     return {'selected_recipes_per_group': selected_recipes, 'all_selected_recipes': all_selected_recipes}
 
 
-def update_user_preferences(group_weights, selected_recipes, likes, dislikes, like_weight=1.2, dislike_weight=0.8, user_ratings=None):
+def update_user_preferences(group_weights, selected_recipes, likes, dislikes,
+                            like_weight=1.2, dislike_weight=0.8, user_ratings=None):
     # Initialize a dictionary to store the user's recipe ratings
     user_ratings = {} if user_ratings is None else user_ratings
 
@@ -87,29 +90,41 @@ def update_user_preferences(group_weights, selected_recipes, likes, dislikes, li
 
     return group_weights, user_ratings
 
-# Example usage
-# recipes = pd.read_csv("data/filtered_recipes_clustered.csv")[["name", "id", "cluster"]]
-# groups = group_recipes(recipes, "cluster")
-# group_weights = {group: 1.0 for group in groups.keys()}
-# print("Initial group weights:")
-# print(group_weights)
-# selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
-# print(selected_recipes["selected_recipes_per_group"])
 
-# for recipe in selected_recipes['all_selected_recipes']:
-#     print(f"ID: {recipe['id']}, Name: {recipe['name']}")
+def run_questionnaire(data_path, num_recipes=10):
+    recipes = pd.read_csv(data_path)[["name", "id", "cluster"]]
+    groups = group_recipes(recipes, "cluster")
+    group_weights = {group: 1.0 for group in groups.keys()}
+    # print("Initial group weights:")
+    # print(group_weights)
+    selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
+    # print(selected_recipes["selected_recipes_per_group"])
 
-# selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]
-# likes = random.sample(selected_recipe_ids, k=3)
-# remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]
-# dislikes = random.sample(remaining_ids, k=3)
+    # for recipe in selected_recipes['all_selected_recipes']:
+    #     print(f"ID: {recipe['id']}, Name: {recipe['name']}")
 
-# print("\nRandomly selected likes (IDs):", likes)
-# print("Randomly selected dislikes (IDs):", dislikes)
+    selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]
+    return selected_recipe_ids, group_weights, selected_recipes
 
-# group_weights, user_ratings = update_user_preferences(group_weights, selected_recipes, likes=likes, dislikes=dislikes)
 
-# print("\nUpdated group weights:")
-# print(group_weights)
-# print("\nUser recipe ratings:")
-# print(user_ratings)
+if __name__ == "__main__":
+    path = Path(__file__).resolve().parent.parent.parent
+
+    selected_recipe_ids, group_weights, selected_recipes = run_questionnaire(os.path.join(
+        path, "data/filtered_recipes_clustered.csv"))
+    print("\nSelected recipes:", selected_recipes)
+    # print(selected_recipes)
+    likes = random.sample(selected_recipe_ids, k=3)
+    remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]
+    dislikes = random.sample(remaining_ids, k=3)
+
+    print("\nRandomly selected likes (IDs):", likes)
+    print("Randomly selected dislikes (IDs):", dislikes)
+
+    group_weights, user_ratings = update_user_preferences(
+        group_weights, selected_recipes, likes=likes, dislikes=dislikes)
+
+    print("\nUpdated group weights:")
+    print(group_weights)
+    print("\nUser recipe ratings:")
+    print(user_ratings)
