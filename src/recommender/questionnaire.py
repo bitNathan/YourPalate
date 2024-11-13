@@ -17,7 +17,7 @@ def filter_recipes(recipes, is_vegetarian=None, max_calories=None, max_time=None
 
 
 def group_recipes(recipes, group_by_column="cluster"):
-    grouped = recipes.groupby(group_by_column)
+    grouped = pd.DataFrame(recipes).groupby(group_by_column)
     grouped_dict = {group: data.to_dict(orient="records") for group, data in grouped}
 
     return grouped_dict
@@ -83,61 +83,61 @@ def update_user_preferences(group_weights, selected_recipes, likes, dislikes,
 
     return group_weights, user_ratings
 
+if __name__ == "__main__":
+    # Example usage
+    recipes = pd.read_csv("../../../data/filtered_recipes_clustered.csv")[["name", "id", "cluster", "description"]].to_dict(orient="records")
 
-# Example usage
-recipes = pd.read_csv("data/filtered_recipes_clustered.csv")[["name", "id", "cluster"]]
+    groups = group_recipes(recipes, "cluster")
+    group_weights = {group: 1.0 for group in groups.keys()}
+    print("Initial group weights:")
+    print(group_weights)
 
-groups = group_recipes(recipes, "cluster")
-group_weights = {group: 1.0 for group in groups.keys()}
-print("Initial group weights:")
-print(group_weights)
+    # returns a dictionary of two dictionaries
+    selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
 
-# returns a dictionary of two dictionaries
-selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
+    print("\nSelected recipes by group")
+    print(selected_recipes["selected_recipes_per_group"])  # dictionary 1: {group: [recipe_ids]}
+    print("\nAll selected recipes")
+    print(selected_recipes["all_selected_recipes"])  # dictionary 2: [{id, name}], list of dictionaries, these values can be shown to the user
+    print()
 
-print("\nSelected recipes by group")
-print(selected_recipes["selected_recipes_per_group"])  # dictionary 1: {group: [recipe_ids]}
-print("\nAll selected recipes")
-print(selected_recipes["all_selected_recipes"])  # dictionary 2: [{id, name}], list of dictionaries, these values can be shown to the user
-print()
+    for recipe in selected_recipes['all_selected_recipes']:  # prints the recipe id and name
+        print(f"ID: {recipe['id']}, Name: {recipe['name']}")
 
-for recipe in selected_recipes['all_selected_recipes']:  # prints the recipe id and name
-    print(f"ID: {recipe['id']}, Name: {recipe['name']}")
+    selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]  # creates a list of recipe ids
+    likes = random.sample(selected_recipe_ids, k=3)  # Randomly select 3 liked recipes
+    remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]  # Get remaining IDs
+    dislikes = random.sample(remaining_ids, k=3)  # Randomly select 3 disliked recipes
 
-selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]  # creates a list of recipe ids
-likes = random.sample(selected_recipe_ids, k=3)  # Randomly select 3 liked recipes
-remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]  # Get remaining IDs
-dislikes = random.sample(remaining_ids, k=3)  # Randomly select 3 disliked recipes
+    print("\nRandomly selected likes (IDs):", likes)
+    print("Randomly selected dislikes (IDs):", dislikes)
 
-print("\nRandomly selected likes (IDs):", likes)
-print("Randomly selected dislikes (IDs):", dislikes)
+    group_weights, user_ratings = update_user_preferences(group_weights, selected_recipes, likes=likes, dislikes=dislikes)
 
-group_weights, user_ratings = update_user_preferences(group_weights, selected_recipes, likes=likes, dislikes=dislikes)
+    print("\nUpdated group weights:")
+    print(group_weights)
+    print("\nUser recipe ratings:")
+    print(user_ratings)  # User ratings is a dictionary of recipe ids and ratings
 
-print("\nUpdated group weights:")
-print(group_weights)
-print("\nUser recipe ratings:")
-print(user_ratings)  # User ratings is a dictionary of recipe ids and ratings
+    print("\n\nSecond iteration:")
+    selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
+    print(selected_recipes["selected_recipes_per_group"])
 
-print("\n\nSecond iteration:")
-selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
-print(selected_recipes["selected_recipes_per_group"])
+    for recipe in selected_recipes['all_selected_recipes']:
+        print(f"ID: {recipe['id']}, Name: {recipe['name']}")
 
-for recipe in selected_recipes['all_selected_recipes']:
-    print(f"ID: {recipe['id']}, Name: {recipe['name']}")
+    selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]
+    likes = random.sample(selected_recipe_ids, k=3)
+    remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]
+    dislikes = random.sample(remaining_ids, k=3)
 
-selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]
-likes = random.sample(selected_recipe_ids, k=3)
-remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]
-dislikes = random.sample(remaining_ids, k=3)
+    print("\nRandomly selected likes (IDs):", likes)
+    print("Randomly selected dislikes (IDs):", dislikes)
 
-print("\nRandomly selected likes (IDs):", likes)
-print("Randomly selected dislikes (IDs):", dislikes)
+    # Remember to pass the user_ratings dictionary from the previous iteration
+    group_weights, user_ratings = update_user_preferences(group_weights, selected_recipes, likes=likes, dislikes=dislikes, user_ratings=user_ratings)
 
-# Remember to pass the user_ratings dictionary from the previous iteration
-group_weights, user_ratings = update_user_preferences(group_weights, selected_recipes, likes=likes, dislikes=dislikes, user_ratings=user_ratings)
-
-print("\nUpdated group weights:")
-print(group_weights)
-print("\nUser recipe ratings:")
-print(user_ratings)
+    print("\nUpdated group weights:")
+    print(group_weights)
+    print("\nUser recipe ratings:")
+    print(user_ratings)
