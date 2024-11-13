@@ -1,7 +1,5 @@
 import pandas as pd
 import random
-from pathlib import Path
-import os
 
 
 def filter_recipes(recipes, is_vegetarian=None, max_calories=None, max_time=None):
@@ -49,9 +47,11 @@ def get_recipes_for_review(groups, group_weights=None, num_recipes=20):
         if groups[selected_group]:
             recipe = random.choice(groups[selected_group])
             selected_recipes[selected_group].append(recipe['id'])
-            all_selected_recipes.append({'id': recipe['id'], 'name': recipe['name'], 'description': recipe['description']})  # Store only ID and name
+            all_selected_recipes.append({'id': recipe['id'], 'name': recipe['name'],
+                                         'description': recipe['description']})  # Store only ID and name
 
-    return {'selected_recipes_per_group': selected_recipes, 'all_selected_recipes': all_selected_recipes}
+    return {'selected_recipes_per_group': selected_recipes,
+            'all_selected_recipes': all_selected_recipes}
 
 
 def update_user_preferences(group_weights, selected_recipes, likes, dislikes,
@@ -83,9 +83,11 @@ def update_user_preferences(group_weights, selected_recipes, likes, dislikes,
 
     return group_weights, user_ratings
 
+
 if __name__ == "__main__":
     # Example usage
-    recipes = pd.read_csv("../../../data/filtered_recipes_clustered.csv")[["name", "id", "cluster", "description"]].to_dict(orient="records")
+    recipes = pd.read_csv("../../../data/filtered_recipes_clustered.csv")
+    [["name", "id", "cluster", "description"]].to_dict(orient="records")
 
     groups = group_recipes(recipes, "cluster")
     group_weights = {group: 1.0 for group in groups.keys()}
@@ -96,15 +98,17 @@ if __name__ == "__main__":
     selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
 
     print("\nSelected recipes by group")
-    print(selected_recipes["selected_recipes_per_group"])  # dictionary 1: {group: [recipe_ids]}
+    # dictionary 1: {group: [recipe_ids]}
+    print(selected_recipes["selected_recipes_per_group"])
     print("\nAll selected recipes")
-    print(selected_recipes["all_selected_recipes"])  # dictionary 2: [{id, name}], list of dictionaries, these values can be shown to the user
-    print()
+    # dictionary 2: [{id, name}], list of dictionaries, these values can be shown to the user
+    print(selected_recipes["all_selected_recipes"])
 
     for recipe in selected_recipes['all_selected_recipes']:  # prints the recipe id and name
         print(f"ID: {recipe['id']}, Name: {recipe['name']}")
 
-    selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]  # creates a list of recipe ids
+    # creates a list of recipe ids
+    selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]
     likes = random.sample(selected_recipe_ids, k=3)  # Randomly select 3 liked recipes
     remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]  # Get remaining IDs
     dislikes = random.sample(remaining_ids, k=3)  # Randomly select 3 disliked recipes
@@ -112,7 +116,8 @@ if __name__ == "__main__":
     print("\nRandomly selected likes (IDs):", likes)
     print("Randomly selected dislikes (IDs):", dislikes)
 
-    group_weights, user_ratings = update_user_preferences(group_weights, selected_recipes, likes=likes, dislikes=dislikes)
+    group_weights, user_ratings = update_user_preferences(
+        group_weights, selected_recipes, likes=likes, dislikes=dislikes)
 
     print("\nUpdated group weights:")
     print(group_weights)
@@ -135,7 +140,8 @@ if __name__ == "__main__":
     print("Randomly selected dislikes (IDs):", dislikes)
 
     # Remember to pass the user_ratings dictionary from the previous iteration
-    group_weights, user_ratings = update_user_preferences(group_weights, selected_recipes, likes=likes, dislikes=dislikes, user_ratings=user_ratings)
+    group_weights, user_ratings = update_user_preferences(
+        group_weights, selected_recipes, likes=likes, dislikes=dislikes, user_ratings=user_ratings)
 
     print("\nUpdated group weights:")
     print(group_weights)

@@ -44,12 +44,12 @@ def quiz(request):
     selected_recipe_ids, group_weights, selected_recipes = questionnaire_module.run_questionnaire(
         os.path.join(path, "data/filtered_recipes_clustered.csv"))
     # groups = group_recipes(recipes, "cluster")
-    
+
     # TODO output all lowercase, would be ncie to uppercase some words
     recipes = []
     for recipe in selected_recipes['all_selected_recipes']:
         recipes.append([recipe['name'], recipe['description']])
-    return render(request, 'quiz.html', {'recipes':recipes})
+    return render(request, 'quiz.html', {'recipes': recipes})
 
 
 @login_required(login_url='/YourPalate/login/')
