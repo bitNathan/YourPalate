@@ -86,8 +86,9 @@ def update_user_preferences(group_weights, selected_recipes, likes, dislikes,
 
 if __name__ == "__main__":
     # Example usage
-    recipes = pd.read_csv("../../../data/filtered_recipes_clustered.csv")
-    [["name", "id", "cluster", "description"]].to_dict(orient="records")
+    recipes = pd.read_csv("data/filtered_recipes_clustered.csv")
+    recipes = recipes[[
+        "name", "id", "cluster", "description"]].to_dict(orient="records")
 
     groups = group_recipes(recipes, "cluster")
     group_weights = {group: 1.0 for group in groups.keys()}
