@@ -1,20 +1,47 @@
 {% include 'logobar.html' %} 
 {% load static %}
-<!-- <link rel="stylesheet" href="{% static 'styles/style.css' %}"> -->
+<link rel="stylesheet" href="{% static 'styles/style.css' %}">
 <title>Home</title> 
 <section class="home"> 
         <center> 
-            <font size="7"> 
-                  
-<p> Quiz </p>
-<p>  <font size="5.5"> 
-    Here, users will complete our cuisine test to determine their preferences.
-    If they have completed their initial quiz, they will rank the foods they have made.
-</p>
+            <font size="7">      
+                <p> Preferences Quiz </p>
+        <font size="5">
+            <p> Please select whether the following recipes are ones you'd like to cook and eat! </p>
+            <p> (You can leave some blank if you don't have a preference, but our recommendations will be better the more information you give) </p>
+        </font> 
+    </center> 
+</section>
+<table border="1" style="width:100%; text-align:left; font-size: 22px;">
+    <tr>
+        <th>Recipe Name</th>
+        <th>Other User's Notes</th>
+        <th>Choice</th>
+    </tr>
+    {% for recipe in recipes %}
+    <script>
+        function highlightRow(button, color) {
+            var row = button.parentNode.parentNode;
+            row.style.backgroundColor = color;
+        }
+    </script>
+    <tr>
+        {% for attr in recipe %}
+            <td>{{ attr }}</td>
+        {% endfor %}
+        <td>
+            <button onclick="highlightRow(this, '#088319')" style="border-radius: 12px; padding: 5px 10px; background-color: #088319; color: white;">Like</button>
+            <button onclick="highlightRow(this, '#f44336')"style="border-radius: 12px; padding: 5px 10px; background-color: #f44336; color: white;">Dislike</button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<center>
     <br><br>
     <button onclick="location.href='/YourPalate/home/'" style="border-radius: 12px; padding: 10px 20px; background-color: #f44336; color: white; font-size: 16px;">
         Back to Home Screen
     </button>
-            </font> 
-        </center> 
-</section>
+    <button onclick="alert('Preferences Recorded!')" style="border-radius: 12px; padding: 10px 20px; background-color: #088319; color: white; font-size: 16px;">
+        Save Preferences
+    </button>
+</center>

@@ -1,5 +1,7 @@
 import pandas as pd
 import random
+from pathlib import Path
+import os
 
 
 def filter_recipes(recipes, is_vegetarian=None, max_calories=None, max_time=None):
@@ -47,7 +49,7 @@ def get_recipes_for_review(groups, group_weights=None, num_recipes=20):
         if groups[selected_group]:
             recipe = random.choice(groups[selected_group])
             selected_recipes[selected_group].append(recipe['id'])
-            all_selected_recipes.append({'id': recipe['id'], 'name': recipe['name']})  # Store only ID and name
+            all_selected_recipes.append({'id': recipe['id'], 'name': recipe['name'], 'description': recipe['description']})  # Store only ID and name
 
     return {'selected_recipes_per_group': selected_recipes, 'all_selected_recipes': all_selected_recipes}
 
