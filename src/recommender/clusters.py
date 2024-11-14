@@ -5,23 +5,19 @@ from apriori import apriori
 
 
 def preprocess_tags(tags_column):
-    # Clean and preprocess the tags, removing special characters and converting them into Python lists.
     return tags_column.apply(lambda x: eval(x))
 
 
 def create_transaction_matrix(tags_column):
-    # Convert the tags into a transaction matrix using one-hot encoding (like a basket of items).
     mlb = MultiLabelBinarizer()
     transaction_matrix = pd.DataFrame(mlb.fit_transform(tags_column), columns=mlb.classes_, index=tags_column.index)
     return transaction_matrix, mlb
 
 
 def apply_apriori(transaction_matrix, min_support=0.05):
-    # Convert transaction matrix to a list of sets for compatibility with the custom Apriori function
     dataset = [set(transaction_matrix.columns[transaction_matrix.iloc[i].values == 1])
                for i in range(len(transaction_matrix))]
 
-    # Use the custom Apriori function to find frequent itemsets
     five_item_frequent_sets, support_data = apriori(dataset, min_support=min_support, verbose=False)
 
     frequent_itemsets_df = pd.DataFrame({
@@ -33,10 +29,8 @@ def apply_apriori(transaction_matrix, min_support=0.05):
 
 
 def cluster_recipes_by_tags(frequent_itemsets, transaction_matrix, min_common_tags=5):
-    # Find frequent tagsets and cluster recipes based on those patterns.
     frequent_tagsets = [set(itemset) for itemset in frequent_itemsets['itemsets'] if len(itemset) == min_common_tags]
 
-    # For each recipe, calculate which frequent tagsets they belong to.
     recipe_clusters = []
     for i, recipe_tags in transaction_matrix.iterrows():
         # Convert active tags in the recipe to a set
