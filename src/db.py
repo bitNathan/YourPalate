@@ -1,5 +1,4 @@
 import mysql.connector
-from mysql.connector import Error
 from dotenv import load_dotenv
 import os
 
@@ -11,6 +10,7 @@ DB_USER = os.getenv('DB_USER')
 DB_PASS = os.getenv('DB_PASS')
 DB_PORT = int(os.getenv('DB_PORT', 3306))
 
+
 def create_server_connection():
     return mysql.connector.connect(
         host=DB_HOST,
@@ -18,6 +18,7 @@ def create_server_connection():
         password=DB_PASS,
         port=DB_PORT
     )
+
 
 def create_database():
     conn = create_server_connection()
@@ -29,6 +30,7 @@ def create_database():
         cursor.close()
         conn.close()
 
+
 def create_connection():
     return mysql.connector.connect(
         host=DB_HOST,
@@ -37,6 +39,7 @@ def create_connection():
         password=DB_PASS,
         port=DB_PORT
     )
+
 
 def initialize_database():
     create_database()
@@ -58,6 +61,7 @@ def initialize_database():
         cursor.close()
         conn.close()
 
+
 def add_user(vegetarian, calories, max_time):
     conn = create_connection()
     user_id = None
@@ -75,6 +79,7 @@ def add_user(vegetarian, calories, max_time):
         conn.close()
     return user_id
 
+
 def get_user(user_id):
     conn = create_connection()
     user_data = None
@@ -88,6 +93,7 @@ def get_user(user_id):
         cursor.close()
         conn.close()
     return user_data
+
 
 def update_user(user_id, vegetarian=None, calories=None, max_time=None):
     conn = create_connection()
@@ -126,6 +132,7 @@ def update_user(user_id, vegetarian=None, calories=None, max_time=None):
         cursor.close()
         conn.close()
 
+
 def delete_user(user_id):
     conn = create_connection()
     try:
@@ -139,6 +146,7 @@ def delete_user(user_id):
     finally:
         cursor.close()
         conn.close()
+
 
 def test_database_functions():
     print("\n--- Initializing Database ---")
