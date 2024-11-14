@@ -1,5 +1,7 @@
-# import pandas as pd
+import pandas as pd
 import random
+from pathlib import Path
+import os
 
 
 def filter_recipes(recipes, is_vegetarian=None, max_calories=None, max_time=None):
@@ -29,7 +31,6 @@ def get_random_recipes_from_groups(groups, num_recipes=5):
 
 
 def get_recipes_for_review(groups, group_weights=None, num_recipes=20):
-    min_weight = 0.1
     group_weights = {group: 1.0 for group in groups.keys()} if group_weights is None else group_weights
 
     total_weight = sum(group_weights.values())
@@ -48,18 +49,13 @@ def get_recipes_for_review(groups, group_weights=None, num_recipes=20):
         if groups[selected_group]:
             recipe = random.choice(groups[selected_group])
             selected_recipes[selected_group].append(recipe['id'])
-            all_selected_recipes.append({'id': recipe['id'], 'name': recipe['name']})  # Store only ID and name
-
-    # print("Recipes selected per group:")
-    # for group, recipe_ids in selected_recipes.items():
-    #     print(f"Group: {group}, Recipe IDs: {recipe_ids}")
-    # print("\nAll selected recipes (ID and Name only):")
-    # print(all_selected_recipes)
+            all_selected_recipes.append({'id': recipe['id'], 'name': recipe['name'], 'description': recipe['description']})  # Store only ID and name
 
     return {'selected_recipes_per_group': selected_recipes, 'all_selected_recipes': all_selected_recipes}
 
 
-def update_user_preferences(group_weights, selected_recipes, likes, dislikes, like_weight=1.2, dislike_weight=0.8, user_ratings=None):
+def update_user_preferences(group_weights, selected_recipes, likes, dislikes,
+                            like_weight=1.2, dislike_weight=0.8, user_ratings=None):
     # Initialize a dictionary to store the user's recipe ratings
     user_ratings = {} if user_ratings is None else user_ratings
 
@@ -87,29 +83,61 @@ def update_user_preferences(group_weights, selected_recipes, likes, dislikes, li
 
     return group_weights, user_ratings
 
+
 # Example usage
-# recipes = pd.read_csv("data/filtered_recipes_clustered.csv")[["name", "id", "cluster"]]
-# groups = group_recipes(recipes, "cluster")
-# group_weights = {group: 1.0 for group in groups.keys()}
-# print("Initial group weights:")
-# print(group_weights)
-# selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
-# print(selected_recipes["selected_recipes_per_group"])
+recipes = pd.read_csv("data/filtered_recipes_clustered.csv")[["name", "id", "cluster"]]
 
-# for recipe in selected_recipes['all_selected_recipes']:
-#     print(f"ID: {recipe['id']}, Name: {recipe['name']}")
+groups = group_recipes(recipes, "cluster")
+group_weights = {group: 1.0 for group in groups.keys()}
+print("Initial group weights:")
+print(group_weights)
 
-# selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]
-# likes = random.sample(selected_recipe_ids, k=3)
-# remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]
-# dislikes = random.sample(remaining_ids, k=3)
+# returns a dictionary of two dictionaries
+selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
 
-# print("\nRandomly selected likes (IDs):", likes)
-# print("Randomly selected dislikes (IDs):", dislikes)
+print("\nSelected recipes by group")
+print(selected_recipes["selected_recipes_per_group"])  # dictionary 1: {group: [recipe_ids]}
+print("\nAll selected recipes")
+print(selected_recipes["all_selected_recipes"])  # dictionary 2: [{id, name}], list of dictionaries, these values can be shown to the user
+print()
 
-# group_weights, user_ratings = update_user_preferences(group_weights, selected_recipes, likes=likes, dislikes=dislikes)
+for recipe in selected_recipes['all_selected_recipes']:  # prints the recipe id and name
+    print(f"ID: {recipe['id']}, Name: {recipe['name']}")
 
-# print("\nUpdated group weights:")
-# print(group_weights)
-# print("\nUser recipe ratings:")
-# print(user_ratings)
+selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]  # creates a list of recipe ids
+likes = random.sample(selected_recipe_ids, k=3)  # Randomly select 3 liked recipes
+remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]  # Get remaining IDs
+dislikes = random.sample(remaining_ids, k=3)  # Randomly select 3 disliked recipes
+
+print("\nRandomly selected likes (IDs):", likes)
+print("Randomly selected dislikes (IDs):", dislikes)
+
+group_weights, user_ratings = update_user_preferences(group_weights, selected_recipes, likes=likes, dislikes=dislikes)
+
+print("\nUpdated group weights:")
+print(group_weights)
+print("\nUser recipe ratings:")
+print(user_ratings)  # User ratings is a dictionary of recipe ids and ratings
+
+print("\n\nSecond iteration:")
+selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
+print(selected_recipes["selected_recipes_per_group"])
+
+for recipe in selected_recipes['all_selected_recipes']:
+    print(f"ID: {recipe['id']}, Name: {recipe['name']}")
+
+selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]
+likes = random.sample(selected_recipe_ids, k=3)
+remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]
+dislikes = random.sample(remaining_ids, k=3)
+
+print("\nRandomly selected likes (IDs):", likes)
+print("Randomly selected dislikes (IDs):", dislikes)
+
+# Remember to pass the user_ratings dictionary from the previous iteration
+group_weights, user_ratings = update_user_preferences(group_weights, selected_recipes, likes=likes, dislikes=dislikes, user_ratings=user_ratings)
+
+print("\nUpdated group weights:")
+print(group_weights)
+print("\nUser recipe ratings:")
+print(user_ratings)

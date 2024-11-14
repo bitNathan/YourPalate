@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+# import pandas as pd
 
 # from authentication tutorial
 # https://www.geeksforgeeks.org/user-authentication-system-using-django/
@@ -13,15 +14,22 @@ from django.contrib.auth.models import User
 import sys
 from pathlib import Path
 import importlib.util
+import os
 
-module_path = Path(__file__).resolve().parent.parent.parent.parent / 'recommender/recommender.py'
+module_path = Path(__file__).resolve().parent.parent.parent.parent / 'recommender'
 # print("module_path: ", module_path)
-module_name = 'recommender'
 
-spec = importlib.util.spec_from_file_location(module_name, module_path)
+# TODO cant test right now because of data issues
+# make sure first line imports correctly
+spec = importlib.util.spec_from_file_location('recommender', os.path.join(module_path, 'recommender.py'))
 recommender_module = importlib.util.module_from_spec(spec)
-sys.modules[module_name] = recommender_module
+sys.modules['recommender'] = recommender_module
 spec.loader.exec_module(recommender_module)
+
+spec = importlib.util.spec_from_file_location('questionnaire', os.path.join(module_path, 'questionnaire.py'))
+questionnaire_module = importlib.util.module_from_spec(spec)
+sys.modules['questionnaire'] = questionnaire_module
+spec.loader.exec_module(questionnaire_module)
 
 
 @login_required(login_url='/YourPalate/login/')
@@ -31,7 +39,17 @@ def home(request):
 
 @login_required(login_url='/YourPalate/login/')
 def quiz(request):
-    return render(request, 'quiz.html')
+    # getting recipes to be rated
+    path = Path(__file__).resolve().parent.parent.parent.parent.parent
+    selected_recipe_ids, group_weights, selected_recipes = questionnaire_module.run_questionnaire(
+        os.path.join(path, "data/filtered_recipes_clustered.csv"))
+    # groups = group_recipes(recipes, "cluster")
+    
+    # TODO output all lowercase, would be ncie to uppercase some words
+    recipes = []
+    for recipe in selected_recipes['all_selected_recipes']:
+        recipes.append([recipe['name'], recipe['description']])
+    return render(request, 'quiz.html', {'recipes':recipes})
 
 
 @login_required(login_url='/YourPalate/login/')
@@ -41,7 +59,6 @@ def restrictions(request):
 
 @login_required(login_url='/YourPalate/login/')
 def results(request):
-
     # running the recommender
     output = recommender_module.run().name.values
 
