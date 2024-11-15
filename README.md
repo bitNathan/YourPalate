@@ -23,7 +23,7 @@ YourPalate is meant to be deployed to an AWS EC2 instance, and interact with an 
 
 To deploy the project...
 1. Clone the repository into an EC2 instance
-2. run the 'setup_docker' script found in the scripts directory
+2. run `./setup_docker` script found in the scripts directory
 3. Update the nginx.conf file in the root directory to reflect your IP and port (default is 8000)
 4. Use 'sudo docker compose up -d' to create and deploy the necessary image
 5. The website should then be accessible from the http://<DNS_name> which is accessible from the AWS interface
