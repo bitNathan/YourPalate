@@ -56,7 +56,7 @@ def quiz(request):
     recipes = []
     for recipe in selected_recipes['all_selected_recipes']:
         # replace if description not there or too short
-        if type(recipe['description']) != str or len(recipe['description']) < 30:
+        if type(recipe['description']) is not str or len(recipe['description']) < 30:
             recipe['description'] = 'Sorry! We couldn\'t find a description in our database.'
         recipes.append([recipe['id'], recipe['name'], recipe['description']])
 
