@@ -42,10 +42,11 @@ If at any point you need to update your restictions just bavigate back to that p
 This will update your data automatically.
 
 ### Preferences
-After you have completed our initial preferences quiz you won't be able to rate more meals until you've generated a meal plan.
+After you have completed our initial preferences quiz you can go into our quiz to rate more recipes, but it's not necessary for getting recommendations.
 
-Once you have, the meals we ask you to rate will be the same ones you were just recommended!
+Once you've successfully generated a mealplan the quiz contents will change slightly.
+The meals we ask you to rate will be the same ones you were just recommended!
 
-The purpose of this is to allow you to make the recipes we recommend and then rate them in our quiz, ensuring our recommendations get better over time as you try new things and learn more about your preferences.
+The purpose of this is to allow you to make the recipes we recommend and then rate them in our quiz, ensuring our recommendations get better over time as you try new things and we learn more about your preferences.
 
 Enjoy!
