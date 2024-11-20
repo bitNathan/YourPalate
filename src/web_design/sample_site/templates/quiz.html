@@ -2,6 +2,21 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'styles/style.css' %}">
 <title>Home</title> 
+
+<script>
+    function highlightRow(button, color) {
+        var row = button.parentNode.parentNode;
+        var input = button.parentNode.querySelector('input[type="hidden"]');
+        if (input.value != '') {
+            row.style.backgroundColor = '';
+            input.value = '';
+        } else {
+            row.style.backgroundColor = color;
+            input.value = button.value;
+        }
+    }
+</script>
+
 <section class="home"> 
         <center> 
             <font size="7">      
@@ -12,36 +27,35 @@
         </font> 
     </center> 
 </section>
-<table border="1" style="width:100%; text-align:left; font-size: 22px;">
-    <tr>
-        <th>Recipe Name</th>
-        <th>Other User's Notes</th>
-        <th>Choice</th>
-    </tr>
-    {% for recipe in recipes %}
-    <script>
-        function highlightRow(button, color) {
-            var row = button.parentNode.parentNode;
-            row.style.backgroundColor = color;
-        }
-    </script>
-    <tr>
-        {% for attr in recipe %}
+<!-- TODO: blast preferences to sql database -->
+<form method="post" action="{% url 'save_preferences' %}">
+    {% csrf_token %}
+    <table border="1" style="width:97%; text-align:left; font-size: 22px; margin-left:auto; margin-right:auto;">
+        <tr>
+            <th>Recipe Name</th>
+            <th>Other User's Notes</th>
+            <th>Preference</th>
+        </tr>
+        {% for recipe in recipes %}
+            <input type="hidden" name="recipes" value=recipe>
+            {% for attr in recipe|slice:"-2:" %}
             <td>{{ attr }}</td>
+            {% endfor %}
+            <td style="text-align: center">
+                <button type="button" value="like" onclick="highlightRow(this, '#088319')" style="border-radius: 12px; padding: 20px 33px; background-color: #088319; color: white; flex: 1;">Like</button>
+                <button type="button" value="dislike" onclick="highlightRow(this, '#f44336')" style="border-radius: 12px; padding: 20px 25px; background-color: #f44336; color: white; flex: 1;">Dislike</button>
+                <input type="hidden" name="preferences" value="">
+            </td>
+        </tr>
         {% endfor %}
-        <td>
-            <button onclick="highlightRow(this, '#088319')" style="border-radius: 12px; padding: 5px 10px; background-color: #088319; color: white;">Like</button>
-            <button onclick="highlightRow(this, '#f44336')"style="border-radius: 12px; padding: 5px 10px; background-color: #f44336; color: white;">Dislike</button>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-<center>
-    <br><br>
-    <button onclick="location.href='/YourPalate/home/'" style="border-radius: 12px; padding: 10px 20px; background-color: #f44336; color: white; font-size: 16px;">
-        Back to Home Screen
-    </button>
-    <button onclick="alert('Preferences Recorded!')" style="border-radius: 12px; padding: 10px 20px; background-color: #088319; color: white; font-size: 16px;">
-        Save Preferences
-    </button>
-</center>
+    </table>
+    <center>
+        <br><br>
+        <button type="button" onclick="location.href='/YourPalate/home/'" style="border-radius: 12px; padding: 10px 20px; background-color: #f44336; color: white; font-size: 16px;">
+            Back to Home Screen
+        </button>
+        <button type="submit" onclick="alert('Your Preferences have been saved!')" style="border-radius: 12px; padding: 10px 20px; background-color: #088319; color: white; font-size: 16px;">
+            Save Preferences
+        </button>
+    </center>
+</form>

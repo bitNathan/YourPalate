@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-# import pandas as pd
+import pandas as pd
 
 # from authentication tutorial
 # https://www.geeksforgeeks.org/user-authentication-system-using-django/
@@ -40,16 +40,55 @@ def home(request):
 @login_required(login_url='/YourPalate/login/')
 def quiz(request):
     # getting recipes to be rated
+    # everything from questionnaire.py / copied from the if __name__ == "__main__": block
     path = Path(__file__).resolve().parent.parent.parent.parent.parent
-    selected_recipe_ids, group_weights, selected_recipes = questionnaire_module.run_questionnaire(
-        os.path.join(path, "data/filtered_recipes_clustered.csv"))
-    # groups = group_recipes(recipes, "cluster")
-    
+
+    recipes = pd.read_csv(os.path.join(path, "data/filtered_recipes_clustered.csv"))
+    recipes = recipes[["name", "id", "cluster", "description"]].to_dict(orient="records")
+
+    groups = questionnaire_module.group_recipes(recipes, "cluster")
+    group_weights = {group: 1.0 for group in groups.keys()}
+
+    selected_recipes = questionnaire_module.get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
+
     # TODO output all lowercase, would be ncie to uppercase some words
+    # maybe do in the data itself rather than here to reduce runtime
     recipes = []
     for recipe in selected_recipes['all_selected_recipes']:
-        recipes.append([recipe['name'], recipe['description']])
-    return render(request, 'quiz.html', {'recipes':recipes})
+        # replace if description not there or too short
+        if type(recipe['description']) is not str or len(recipe['description']) < 30:
+            recipe['description'] = 'Sorry! We couldn\'t find a description in our database.'
+        recipes.append([recipe['id'], recipe['name'], recipe['description']])
+
+    # print("recipes: ", recipes)
+    return render(request, 'quiz.html', {'recipes': recipes})
+
+
+@login_required(login_url='/YourPalate/login/')
+def save_preferences(request):
+    # TODO save to sql database under user
+    if request.method == 'POST':
+        # preferences = list of 'like' / 'dislike' / '' in order of presentation
+        preferences = request.POST.getlist('preferences')
+        recipes = request.POST.getlist('recipes')
+        try:
+            assert len(preferences) == len(recipes)
+        except AssertionError:
+            print("preferences:", len(preferences))
+            print("recipes:", len(recipes))
+            raise ValueError("Length of preferences and recipes must be the same")
+        print('debugging info for save_preferences')
+        # print("preferences: ", preferences)
+        # print("recipes: ", recipes)
+
+        likes = [int(recipe['id']) for recipe in recipes if preferences[recipes.index(recipe)] == 'likes']
+        dislikes = [int(recipe['id']) for recipe in recipes if preferences[recipes.index(recipe)] == 'dislikes']
+
+        print("likes: ", likes)
+        print("dislikes: ", dislikes)
+        print("recipes: ", recipes)
+
+    return redirect('/YourPalate/home/')
 
 
 @login_required(login_url='/YourPalate/login/')
