@@ -28,11 +28,13 @@ def create_user_matrix(ratings, expected_features=None):
 
     # If expected features (recipes) are provided, align the matrix columns
     if expected_features is not None:
-        missing_features = set(expected_features) - set(user_matrix.columns)
-        for feature in missing_features:
-            user_matrix[feature] = 0  # Add missing features with 0 ratings
-        user_matrix = user_matrix[expected_features]  # Reorder columns to match expected features
+        missing_features = list(set(expected_features) - set(user_matrix.columns))
+        # Add missing features as columns with 0 ratings in a single operation
+        missing_columns = pd.DataFrame(0, index=user_matrix.index, columns=missing_features)
+        user_matrix = pd.concat([user_matrix, missing_columns], axis=1)
 
+        # Reorder columns to match expected features
+        user_matrix = user_matrix[expected_features]
     return user_matrix
 
 
