@@ -54,7 +54,7 @@ def get_similar_users(knn, user_matrix, user_id, n_neighbors=5):
     return similar_user_ids
 
 
-def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=10):
+def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=100):
     # Aggregate ratings from similar users and find the top recipes
     recipe_scores = {}
 
@@ -73,7 +73,7 @@ def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=10):
     return recommended_recipes
 
 
-def run(user_id=23333, n_neighbors=5):
+def run(user_id=23333, n_neighbors=10):
     project_root = Path(__file__).parent.parent.parent
 
     # Load optimized recipe ratings
@@ -82,7 +82,7 @@ def run(user_id=23333, n_neighbors=5):
 
     # Load the KNN model
     print("Loading KNN model...")
-    knn = joblib.load(project_root / 'src/recommender/knn_subset_model.joblib')
+    knn = joblib.load(project_root / 'src/recommender/knn_larger_subset_model_n100.joblib')
 
     # Retrieve expected features from the KNN model and create user matrix
     print("Creating user matrix...")

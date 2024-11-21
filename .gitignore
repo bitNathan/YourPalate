@@ -1,8 +1,9 @@
 *.pyc
 *.log
 tests/__pycache__/
-
+**/.DS_Store
 data/RAW_recipes/
 data/user_recipe_matrix/
 data/user_recipe_matrix_subset/
 data/*.csv
+*.joblib
