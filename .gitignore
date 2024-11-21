@@ -5,3 +5,4 @@ tests/__pycache__/
 data/RAW_recipes/
 data/user_recipe_matrix/
 data/user_recipe_matrix_subset/
+data/*.csv
