@@ -1,4 +1,4 @@
-# Your Palate
+# YourPalate
 _We could insert link to the website here, as an example. Once we get a stable link._
 
 ## Project Abstract
