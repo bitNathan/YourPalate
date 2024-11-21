@@ -101,6 +101,12 @@ def run(user_id=23333, n_neighbors=5):
     # Convert recommendation list to comma-separated format for display
     recommendations_list = ", ".join(map(str, recommendations))
 
+    # TODO
+    # Display the recommendations names, ingredients, discriptions via SQL
+
+    # TODO
+    # make shopping list file via SQL
+
     return similar_user_ids, recommendations_list
 
 
