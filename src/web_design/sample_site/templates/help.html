@@ -1,10 +1,14 @@
 {% include 'logobar.html' %} 
 {% load static %} 
 <link rel="stylesheet" href="{% static 'styles/style.css' %}">
-
-
+<title>Help</title>
 <section class="home">
-
+<style>
+    p {
+        font-size: 18px;
+    }
+</style>
+<h1 id="yourpalate-help">YourPalate Help</h1>
 <h2 id="generating-your-first-meal-plan">Generating your First Meal Plan</h2>
     <p>
         Each user must log into YourPalate using their unique username and password before using its features. - If you don’t yet have an account register an account by following the “Register” button in the login page, and following the subsequent instructions there.
@@ -73,3 +77,9 @@
         Enjoy!
     </p>
 </section>
+
+<div style="text-align: center;">
+    <button type="button" onclick="location.href='/YourPalate/home/'" style="border-radius: 12px; padding: 10px 20px; background-color: #f44336; color: white; font-size: 16px;">
+        Back to Home Screen
+    </button>
+</div>
