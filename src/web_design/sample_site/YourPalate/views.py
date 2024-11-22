@@ -98,6 +98,7 @@ def restrictions(request):
 
 @login_required(login_url='/YourPalate/login/')
 def results(request):
+
     # running the recommender
     output = recommender_module.run().name.values
 
