@@ -3,6 +3,7 @@ import pandas as pd
 from pathlib import Path
 import time
 import json
+import random
 
 
 def load_recipe_ratings():
@@ -18,13 +19,19 @@ def load_recipe_ratings():
 
 def create_user_matrix(ratings, expected_features=None):
     # Expand user ratings into a sparse user matrix format
+    # print('started creating user matrix')
+
     user_data = []
     for _, row in ratings.iterrows():
         recipe_id = row['recipe_id']
         for user_id, rating in row['user_ratings'].items():
             user_data.append((user_id, recipe_id, rating))
     user_matrix_df = pd.DataFrame(user_data, columns=['user_id', 'recipe_id', 'rating'])
+
+    # this line sometimes causes issues when run locally but works fine on aws
+    # prints 'killed' when run locally
     user_matrix = user_matrix_df.pivot(index='user_id', columns='recipe_id', values='rating').fillna(0)
+    # print('finished pivoting user matrix')
 
     # If expected features (recipes) are provided, align the matrix columns
     if expected_features is not None:
@@ -66,9 +73,12 @@ def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=100):
             if str(user_id) in user_ratings:
                 recipe_scores[row['recipe_id']] = recipe_scores.get(row['recipe_id'], 0) + user_ratings[str(user_id)]
 
-    # Sort recipes by aggregated score and get the top N
+    # always gets top N recipes from similar users
     top_recipes = sorted(recipe_scores.items(), key=lambda x: x[1], reverse=True)[:n]
     recommended_recipes = [recipe for recipe, _ in top_recipes]
+
+    # if a user generates multiple plans, they shouldn't get the same recommendations
+    random.shuffle(recommended_recipes)
 
     return recommended_recipes
 
