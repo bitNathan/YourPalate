@@ -265,7 +265,7 @@ def get_table_as_dataframe(table_name):
         df = pd.read_sql(query, conn)
     finally:
         conn.close()
-    
+
     return df
 
 
