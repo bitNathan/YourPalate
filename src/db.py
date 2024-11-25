@@ -258,7 +258,7 @@ def get_recipes_as_dataframe(recipe_ids):
     return df
 
 
-def get__table_as_dataframe(table_name):
+def get_table_as_dataframe(table_name):
     conn = create_connection()
     try:
         query = f"SELECT * FROM {table_name};"
