@@ -27,7 +27,12 @@
        
     <button onclick="location.href='/YourPalate/results/'" style="border-radius: 12px; padding: 10px 20px; background-color: #088319; color: white; font-size: 16px;"">
         Generate Mealplan!
-     </button>
+    </button>
+    <script>
+        document.querySelector('button[onclick*="/YourPalate/results/"]').addEventListener('click', function() {
+           document.body.style.cursor = 'wait';
+        });
+    </script>
      <p style="font-size: 18px; color: #ffffff;">
          (Running the recommender takes time, ~30 seconds, please be patient)
      </p>

@@ -88,8 +88,5 @@ class TestDjango(tc):
     def test_restrictions_page_access_after_login(self):
         self.helper_page_access_after_login('restrictions')
 
-    def test_loading_page_access_after_login(self):
-        self.helper_page_access_after_login('loading')
-
     def test_help_page_access_after_login(self):
         self.helper_page_access_after_login('help')
