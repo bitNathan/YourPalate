@@ -160,6 +160,7 @@ def delete_user_restrictions(user_id):
         cursor.close()
         conn.close()
 
+
 def add_new_user(user_ratings=None):
     conn = create_connection()
     user_id = None
@@ -212,6 +213,7 @@ def update_new_user_ratings(user_id, new_ratings):
         cursor.close()
         conn.close()
 
+
 def get_new_user_ratings(user_id):
     conn = create_connection()
     try:
@@ -232,27 +234,27 @@ def get_recipes_as_dataframe(recipe_ids):
     conn = create_connection()
     try:
         cursor = conn.cursor(dictionary=True)
-        
+
         # Handle both single recipe_id and list of recipe_ids
         if isinstance(recipe_ids, int):
             recipe_ids = [recipe_ids]
-        
+
         # Create placeholders for the query
         placeholders = ", ".join(["%s"] * len(recipe_ids))
         query = f"""
             SELECT * FROM filtered_recipes_clustered
             WHERE id IN ({placeholders});
         """
-        
+
         cursor.execute(query, recipe_ids)
         results = cursor.fetchall()
-        
+
         # Convert the result (list of dictionaries) into a pandas DataFrame
         df = pd.DataFrame(results)
     finally:
         cursor.close()
         conn.close()
-    
+
     return df
 
 
@@ -313,6 +315,7 @@ def test_database_functions():
     else:
         print("Failed to delete non-existent user.")
 
+
 def test_new_user_table_functions():
     print("\n--- Initializing Database for New Users Table ---")
     initialize_database()
@@ -372,7 +375,7 @@ def test_new_user_table_functions():
 
 def test_get_recipes_as_dataframe():
     print("\n--- Testing get_recipes_as_dataframe ---")
-    
+
     # Test with a single recipe_id
     print("\nFetching single recipe with recipe_id = 63986:")
     try:
