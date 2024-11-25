@@ -8,9 +8,9 @@ def filter_recipes(recipes, is_vegetarian=None, max_calories=None, max_time=None
 
     return [
         recipe for recipe in recipes
-        if (is_vegetarian is None or recipe.get('vegetarian') == is_vegetarian)
-        and recipe.get('calories', 0) <= max_calories
-        and recipe.get('time', 0) <= max_time
+        if (is_vegetarian is None or recipe.get('vegetarian') == is_vegetarian) and (
+            recipe.get('calories', 0) <= max_calories) and (
+                recipe.get('time', 0) <= max_time)
     ]
 
 
