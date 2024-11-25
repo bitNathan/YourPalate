@@ -18,6 +18,7 @@ urlpatterns = [
     path("login/", views.login_page, name="login"),
     path("signUp/", views.signUp, name="signUp"),
     path("save_preferences/", views.save_preferences, name="save_preferences"),
+    path("help/", views.help, name="help"),
 ]
 
 # TODO maybe adds css and image functionality

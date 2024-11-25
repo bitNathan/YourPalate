@@ -109,6 +109,10 @@ def loading(request):
     return render(request, 'loading.html')
 
 
+def help(request):
+    return render(request, 'help.html')
+
+
 '''
 Authentication views from
 https://www.geeksforgeeks.org/user-authentication-system-using-django/
