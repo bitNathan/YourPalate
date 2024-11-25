@@ -1,26 +1,38 @@
 import joblib
 import pandas as pd
-from pathlib import Path
-import time
 import json
 import random
+import time
+import sys
+from pathlib import Path
+project_root = Path(__file__).resolve().parent.parent.parent
+sys.path.append(str(project_root))
+from src.db import create_connection
 
 
-def load_recipe_ratings():
-    project_root = Path(__file__).parent.parent.parent
-    data_path = project_root / "data"
-    optimized_ratings_path = data_path / "user_ratings.csv"
+def load_user_ratings():
+    """
+    Load user ratings from the `user_ratings` table.
 
-    # Load optimized ratings and convert JSON strings back to dictionaries
-    ratings = pd.read_csv(optimized_ratings_path)
-    ratings['user_ratings'] = ratings['user_ratings'].apply(json.loads)
+    """
+    conn = create_connection()
+    try:
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT recipe_id, user_ratings FROM `User-restrictions`.`user_ratings`;")
+        ratings_data = cursor.fetchall()
+        ratings = pd.DataFrame(ratings_data)
+        ratings['user_ratings'] = ratings['user_ratings'].apply(json.loads)  # Convert JSON strings to dicts
+    finally:
+        cursor.close()
+        conn.close()
+
     return ratings
 
 
 def create_user_matrix(ratings, expected_features=None):
-    # Expand user ratings into a sparse user matrix format
-    # print('started creating user matrix')
-
+    """
+    Create a user matrix from the database-sourced ratings data.
+    """
     user_data = []
     for _, row in ratings.iterrows():
         recipe_id = row['recipe_id']
@@ -28,88 +40,95 @@ def create_user_matrix(ratings, expected_features=None):
             user_data.append((user_id, recipe_id, rating))
     user_matrix_df = pd.DataFrame(user_data, columns=['user_id', 'recipe_id', 'rating'])
 
-    # this line sometimes causes issues when run locally but works fine on aws
-    # prints 'killed' when run locally
     user_matrix = user_matrix_df.pivot(index='user_id', columns='recipe_id', values='rating').fillna(0)
-    # print('finished pivoting user matrix')
 
-    # If expected features (recipes) are provided, align the matrix columns
     if expected_features is not None:
-        missing_features = list(set(expected_features) - set(user_matrix.columns))  # Convert set to list
-        # if missing_features:
-        # Add missing features as columns with 0 ratings in a single operation
+        missing_features = list(set(expected_features) - set(user_matrix.columns))
         missing_columns = pd.DataFrame(0, index=user_matrix.index, columns=missing_features)
         user_matrix = pd.concat([user_matrix, missing_columns], axis=1)
-
-        # Reorder columns to match expected features
         user_matrix = user_matrix[expected_features]
 
     return user_matrix
 
 
-def get_similar_users(knn, user_matrix, user_id, n_neighbors=5):
-    # Ensure the user_id exists in the matrix
+def get_similar_users(knn, user_matrix, user_id, n_neighbors=10):
+    """
+    Find similar users using KNN.
+    """
     if str(user_id) not in user_matrix.index:
         raise ValueError(f"User ID {user_id} not found in user ratings.")
 
-    # Get the user's ratings vector
     user_vector = user_matrix.loc[[str(user_id)]]
-
-    # Find similar users
     distances, indices = knn.kneighbors(user_vector, n_neighbors=n_neighbors)
     similar_user_ids = [user_matrix.index[i] for i in indices[0]]
     return similar_user_ids
 
 
 def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=100):
-    # Aggregate ratings from similar users and find the top recipes
+    """
+    Aggregate ratings from similar users and find the top recipes.
+    """
     recipe_scores = {}
-
     for _, row in ratings.iterrows():
         user_ratings = row['user_ratings']
-
-        # Sum ratings of similar users for each recipe
         for user_id in similar_user_ids:
             if str(user_id) in user_ratings:
                 recipe_scores[row['recipe_id']] = recipe_scores.get(row['recipe_id'], 0) + user_ratings[str(user_id)]
 
-    # always gets top N recipes from similar users
     top_recipes = sorted(recipe_scores.items(), key=lambda x: x[1], reverse=True)[:n]
     recommended_recipes = [recipe for recipe, _ in top_recipes]
-
-    # if a user generates multiple plans, they shouldn't get the same recommendations
     random.shuffle(recommended_recipes)
 
     return recommended_recipes
 
 
+def get_recipe_details(recipe_ids):
+    """
+    Fetch recipe details for given recipe IDs from the `filtered_recipes_clustered` table.
+    """
+    conn = create_connection()
+    try:
+        cursor = conn.cursor(dictionary=True)
+        placeholders = ", ".join(["%s"] * len(recipe_ids))
+        query = f"""
+            SELECT * FROM `User-restrictions`.`filtered_recipes_clustered`
+            WHERE id IN ({placeholders});
+        """
+        cursor.execute(query, recipe_ids)
+        recipes = cursor.fetchall()
+    finally:
+        cursor.close()
+        conn.close()
+
+    return recipes
+
+
 def run(user_id=23333, n_neighbors=10):
-    project_root = Path(__file__).parent.parent.parent
+    """
+    Main function to run the recommender system.
+    """
+    # print("Loading user ratings...")
+    ratings = load_user_ratings()
 
-    # Load optimized recipe ratings
-    print("Loading optimized recipe ratings...")
-    ratings = load_recipe_ratings()
+    # print("Loading KNN model...")
+    knn = joblib.load('knn_larger_subset_model_n100.joblib')
 
-    # Load the KNN model
-    print("Loading KNN model...")
-    knn = joblib.load(project_root / 'src/recommender/knn_larger_subset_model_n100.joblib')
-
-    # Retrieve expected features from the KNN model and create user matrix
-    print("Creating user matrix...")
+    # print("Creating user matrix...")
     expected_features = knn.get_feature_names_out() if hasattr(knn, 'get_feature_names_out') else knn.feature_names_in_
     user_matrix = create_user_matrix(ratings, expected_features)
 
-    # Find similar users
-    print("Finding similar users...")
+    # print("Finding similar users...")
     similar_user_ids = get_similar_users(knn, user_matrix, user_id, n_neighbors)
     print("Similar users:", similar_user_ids)
 
-    # Generate recommendations based on similar users
-    print("Generating recommendations...")
-    recommendations = get_top_recipes_from_similar_users(ratings, similar_user_ids)
+    # print("Generating recommendations...")
+    recommended_recipe_ids = get_top_recipes_from_similar_users(ratings, similar_user_ids)
 
-    # Convert recommendation list to comma-separated format for display
-    recommendations_list = ", ".join(map(str, recommendations))
+    # print("Fetching recipe details...")
+    recipe_details = get_recipe_details(recommended_recipe_ids)
+
+    recommended_recipes = [f"{recipe['name']} (ID: {recipe['id']})" for recipe in recipe_details]
+    recommendations_list = ", ".join(recommended_recipes)
 
     # TODO
     # Display the recommendations names, ingredients, discriptions via SQL
