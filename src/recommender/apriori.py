@@ -11,7 +11,7 @@ def apriori(dataset, min_support=0.5, verbose=False):
     k = 2
 
     while k <= 5 and (len(F[k - 2]) > 0):
-        Ck = apriori_gen(F[k-2], k)
+        Ck = apriori_gen(F[k - 2], k)
         Fk, supK = get_freq(D, Ck, min_support)
         support_data.update(supK)
         F.append(Fk)
