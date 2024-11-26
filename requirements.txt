@@ -7,4 +7,3 @@ mlxtend
 scikit-learn
 pandas
 mysql.connector
-dotenv
