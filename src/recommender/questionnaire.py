@@ -1,8 +1,18 @@
 import pandas as pd
 import random
+import sys
+from pathlib import Path
+
+project_root = Path(__file__).resolve().parent.parent.parent
+sys.path.append(str(project_root))
+
+from src.db import create_connection
 
 
 def filter_recipes(recipes, is_vegetarian=None, max_calories=None, max_time=None):
+    """
+    Filter recipes based on vegetarian preference, maximum calories, and preparation time.
+    """
     max_calories = max_calories if max_calories is not None else float('inf')
     max_time = max_time if max_time is not None else float('inf')
 
@@ -15,6 +25,9 @@ def filter_recipes(recipes, is_vegetarian=None, max_calories=None, max_time=None
 
 
 def group_recipes(recipes, group_by_column="cluster"):
+    """
+    Group recipes by a specified column (e.g., "cluster").
+    """
     grouped = pd.DataFrame(recipes).groupby(group_by_column)
     grouped_dict = {group: data.to_dict(orient="records") for group, data in grouped}
 
@@ -22,6 +35,9 @@ def group_recipes(recipes, group_by_column="cluster"):
 
 
 def get_random_recipes_from_groups(groups, num_recipes=5):
+    """
+    Randomly select a specified number of recipes from each group.
+    """
     selected_recipes = []
     for recipes in groups.values():
         selected_recipes.extend(random.sample(recipes, min(len(recipes), num_recipes)))
@@ -29,6 +45,9 @@ def get_random_recipes_from_groups(groups, num_recipes=5):
 
 
 def get_recipes_for_review(groups, group_weights=None, num_recipes=20):
+    """
+    Select recipes for review based on weighted group probabilities.
+    """
     group_weights = {group: 1.0 for group in groups.keys()} if group_weights is None else group_weights
 
     total_weight = sum(group_weights.values())
@@ -56,78 +75,87 @@ def get_recipes_for_review(groups, group_weights=None, num_recipes=20):
 
 def update_user_preferences(group_weights, selected_recipes, likes, dislikes,
                             like_weight=1.2, dislike_weight=0.8, user_ratings=None):
-    # Initialize a dictionary to store the user's recipe ratings
+    """
+    Update user preferences and group weights based on feedback.
+    """
     user_ratings = {} if user_ratings is None else user_ratings
 
-    # Track likes and dislikes per group
     for group, recipes in selected_recipes['selected_recipes_per_group'].items():
-        # Since recipes are IDs directly, we can check against the likes and dislikes lists
         group_likes = sum(1 for recipe_id in recipes if recipe_id in likes)
         group_dislikes = sum(1 for recipe_id in recipes if recipe_id in dislikes)
 
-        # Update weights based on feedback
         group_weights[group] *= (like_weight ** group_likes) * (dislike_weight ** group_dislikes)
 
-        # Add user ratings for each recipe based on the feedback lists
         for recipe_id in recipes:
             if recipe_id in likes:
-                user_ratings[recipe_id] = 5  # Liked recipes get a rating of 5
+                user_ratings[recipe_id] = 5
             elif recipe_id in dislikes:
-                user_ratings[recipe_id] = 1  # Disliked recipes get a rating of 1
+                user_ratings[recipe_id] = 1
             else:
-                user_ratings[recipe_id] = 0  # Neutral or not rated recipes get a rating of 0
+                user_ratings[recipe_id] = 0
 
-    # Normalize weights so they remain relative
     total_weight = sum(group_weights.values())
     group_weights = {group: weight / total_weight for group, weight in group_weights.items()}
 
     return group_weights, user_ratings
 
 
-if __name__ == "__main__":
-    # Example usage
-    recipes = pd.read_csv("data/filtered_recipes_clustered.csv")
-    recipes = recipes[[
-        "name", "id", "cluster", "description"]].to_dict(orient="records")
+def load_recipes_from_sql():
+    """
+    Load recipes from the SQL `filtered_recipes_clustered` table and derive fields like calories, vegetarian, and time.
+    """
+    conn = create_connection()
+    try:
+        query = """
+        SELECT
+            name,
+            id,
+            cluster,
+            description,
+            SUBSTRING_INDEX(SUBSTRING_INDEX(nutrition, ',', 1), '[', -1) AS calories,  -- Extract calories
+            CASE
+                WHEN tags LIKE '%vegetarian%' THEN 1
+                ELSE 0
+            END AS vegetarian,  -- Determine vegetarian status
+            minutes AS time,  -- Use minutes as time
+            tags,
+            nutrition,
+            n_steps,
+            steps,
+            ingredients,
+            n_ingredients,
+            ingredients_str
+        FROM filtered_recipes_clustered;
+        """
+        recipes = pd.read_sql(query, conn)
+    finally:
+        conn.close()
 
+    # Ensure proper data types
+    recipes['calories'] = recipes['calories'].astype(float)
+    recipes['vegetarian'] = recipes['vegetarian'].astype(bool)
+    recipes['time'] = recipes['time'].astype(int)
+
+    return recipes.to_dict(orient="records")
+
+
+if __name__ == "__main__":
+    # Load recipes from SQL table
+    recipes = load_recipes_from_sql()
+
+    # Group recipes by "cluster"
     groups = group_recipes(recipes, "cluster")
     group_weights = {group: 1.0 for group in groups.keys()}
     print("Initial group weights:")
     print(group_weights)
 
-    # returns a dictionary of two dictionaries
+    # Select recipes for review
     selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
 
     print("\nSelected recipes by group")
-    # dictionary 1: {group: [recipe_ids]}
     print(selected_recipes["selected_recipes_per_group"])
     print("\nAll selected recipes")
-    # dictionary 2: [{id, name}], list of dictionaries, these values can be shown to the user
     print(selected_recipes["all_selected_recipes"])
-
-    for recipe in selected_recipes['all_selected_recipes']:  # prints the recipe id and name
-        print(f"ID: {recipe['id']}, Name: {recipe['name']}")
-
-    # creates a list of recipe ids
-    selected_recipe_ids = [recipe['id'] for recipe in selected_recipes['all_selected_recipes']]
-    likes = random.sample(selected_recipe_ids, k=3)  # Randomly select 3 liked recipes
-    remaining_ids = [recipe_id for recipe_id in selected_recipe_ids if recipe_id not in likes]  # Get remaining IDs
-    dislikes = random.sample(remaining_ids, k=3)  # Randomly select 3 disliked recipes
-
-    print("\nRandomly selected likes (IDs):", likes)
-    print("Randomly selected dislikes (IDs):", dislikes)
-
-    group_weights, user_ratings = update_user_preferences(
-        group_weights, selected_recipes, likes=likes, dislikes=dislikes)
-
-    print("\nUpdated group weights:")
-    print(group_weights)
-    print("\nUser recipe ratings:")
-    print(user_ratings)  # User ratings is a dictionary of recipe ids and ratings
-
-    print("\n\nSecond iteration:")
-    selected_recipes = get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
-    print(selected_recipes["selected_recipes_per_group"])
 
     for recipe in selected_recipes['all_selected_recipes']:
         print(f"ID: {recipe['id']}, Name: {recipe['name']}")
@@ -140,9 +168,8 @@ if __name__ == "__main__":
     print("\nRandomly selected likes (IDs):", likes)
     print("Randomly selected dislikes (IDs):", dislikes)
 
-    # Remember to pass the user_ratings dictionary from the previous iteration
     group_weights, user_ratings = update_user_preferences(
-        group_weights, selected_recipes, likes=likes, dislikes=dislikes, user_ratings=user_ratings)
+        group_weights, selected_recipes, likes=likes, dislikes=dislikes)
 
     print("\nUpdated group weights:")
     print(group_weights)
