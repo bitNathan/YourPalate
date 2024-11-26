@@ -8,3 +8,5 @@ scikit-learn
 pandas
 mysql.connector
 python-dotenv
+sqlalchemy
+pymysql
