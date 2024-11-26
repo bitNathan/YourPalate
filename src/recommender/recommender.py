@@ -10,19 +10,16 @@ from sqlalchemy import create_engine
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(project_root))
 
-from src.db import create_connection, DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT
+from src.db import DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT
 
 
 def load_recipe_ratings():
-    """
-    Load and process recipe ratings from the `user_ratings` SQL table.
-    """
     db_url = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     engine = create_engine(db_url)
 
     query = "SELECT recipe_id, user_ratings FROM user_ratings;"
     df = pd.read_sql(query, engine)
-    print(df.shape)
+    # print(df.shape)
 
     user_data = []
     for _, row in df.iterrows():
@@ -32,17 +29,14 @@ def load_recipe_ratings():
             user_data.append({"user_id": str(user_id), "recipe_id": recipe_id, "rating": rating})
 
     ratings = pd.DataFrame(user_data)
-    print(ratings.shape)
+    # print(ratings.shape)
 
     return ratings
 
 
 def create_user_matrix(ratings, expected_features=None):
-    """
-    Create a user matrix from the SQL-based ratings data.
-    """
     user_matrix_df = ratings.pivot(index='user_id', columns='recipe_id', values='rating').fillna(0)
-    print("done making matrix")
+    # print("done making matrix")
 
     if expected_features is not None:
         missing_features = list(set(expected_features) - set(user_matrix_df.columns))
@@ -54,9 +48,6 @@ def create_user_matrix(ratings, expected_features=None):
 
 
 def get_similar_users(knn, user_matrix, user_id, n_neighbors=5):
-    """
-    Find similar users using KNN.
-    """
     if str(user_id) not in user_matrix.index:
         raise ValueError(f"User ID {user_id} not found in user ratings.")
 
@@ -68,9 +59,6 @@ def get_similar_users(knn, user_matrix, user_id, n_neighbors=5):
 
 
 def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=100):
-    """
-    Aggregate ratings from similar users and find the top recipes.
-    """
     recipe_scores = {}
 
     for _, row in ratings.iterrows():
@@ -86,9 +74,6 @@ def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=100):
 
 
 def run(user_id=23333, n_neighbors=10):
-    """
-    Main function to run the recommender system.
-    """
     project_root = Path(__file__).parent.parent.parent
 
     # print("Loading recipe ratings...")
@@ -96,14 +81,14 @@ def run(user_id=23333, n_neighbors=10):
 
     # print("Loading KNN model...")
     knn = joblib.load(project_root / 'src/recommender/knn_larger_subset_model_n100.joblib')
-    
-    print("getting features")
+
+    # print("getting features")
     expected_features = knn.get_feature_names_out() if hasattr(knn, 'get_feature_names_out') else knn.feature_names_in_
 
-    print("Creating user matrix...")
+    # print("Creating user matrix...")
     user_matrix = create_user_matrix(ratings, expected_features)
 
-    print("Finding similar users...")
+    # print("Finding similar users...")
     similar_user_ids = get_similar_users(knn, user_matrix, user_id, n_neighbors)
     # print("Similar users:", similar_user_ids)
 

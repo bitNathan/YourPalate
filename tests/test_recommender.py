@@ -16,5 +16,6 @@ def test_recommender():
     print("Similar users:", similar_users)
     print("Recommended recipes:", recommendations)
 
+
 if __name__ == "__main__":
     test_recommender()
