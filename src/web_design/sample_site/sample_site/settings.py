@@ -89,16 +89,16 @@ str_prefix = "django.contrib.auth.password_validation"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": str_prefix+".UserAttributeSimilarityValidator",
+        "NAME": str_prefix + ".UserAttributeSimilarityValidator",
     },
     {
-        "NAME": str_prefix+".MinimumLengthValidator",
+        "NAME": str_prefix + ".MinimumLengthValidator",
     },
     {
-        "NAME": str_prefix+".CommonPasswordValidator",
+        "NAME": str_prefix + ".CommonPasswordValidator",
     },
     {
-        "NAME": str_prefix+".NumericPasswordValidator",
+        "NAME": str_prefix + ".NumericPasswordValidator",
     },
 ]
 
