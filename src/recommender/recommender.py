@@ -5,36 +5,34 @@ import time
 import json
 import sys
 from pathlib import Path
+from sqlalchemy import create_engine
 
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(project_root))
 
-from src.db import create_connection
+from src.db import create_connection, DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT
 
 
 def load_recipe_ratings():
     """
     Load and process recipe ratings from the `user_ratings` SQL table.
     """
-    conn = create_connection()
-    try:
-        query = "SELECT recipe_id, user_ratings FROM user_ratings;"
-        print(query)
-        df = pd.read_sql(query, conn)
-        print(df.shape)
+    db_url = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    engine = create_engine(db_url)
 
-        user_data = []
-        for _, row in df.iterrows():
-            recipe_id = row["recipe_id"]
-            user_ratings = json.loads(row["user_ratings"])
-            for user_id, rating in user_ratings.items():
-                user_data.append({"user_id": str(user_id), "recipe_id": recipe_id, "rating": rating})
+    query = "SELECT recipe_id, user_ratings FROM user_ratings;"
+    df = pd.read_sql(query, engine)
+    print(df.shape)
 
-        ratings = pd.DataFrame(user_data)
-        print(ratings.shape)
+    user_data = []
+    for _, row in df.iterrows():
+        recipe_id = row["recipe_id"]
+        user_ratings = json.loads(row["user_ratings"])
+        for user_id, rating in user_ratings.items():
+            user_data.append({"user_id": str(user_id), "recipe_id": recipe_id, "rating": rating})
 
-    finally:
-        conn.close()
+    ratings = pd.DataFrame(user_data)
+    print(ratings.shape)
 
     return ratings
 
@@ -44,6 +42,7 @@ def create_user_matrix(ratings, expected_features=None):
     Create a user matrix from the SQL-based ratings data.
     """
     user_matrix_df = ratings.pivot(index='user_id', columns='recipe_id', values='rating').fillna(0)
+    print("done making matrix")
 
     if expected_features is not None:
         missing_features = list(set(expected_features) - set(user_matrix_df.columns))
@@ -97,12 +96,14 @@ def run(user_id=23333, n_neighbors=10):
 
     # print("Loading KNN model...")
     knn = joblib.load(project_root / 'src/recommender/knn_larger_subset_model_n100.joblib')
-
-    # print("Creating user matrix...")
+    
+    print("getting features")
     expected_features = knn.get_feature_names_out() if hasattr(knn, 'get_feature_names_out') else knn.feature_names_in_
+
+    print("Creating user matrix...")
     user_matrix = create_user_matrix(ratings, expected_features)
 
-    # print("Finding similar users...")
+    print("Finding similar users...")
     similar_user_ids = get_similar_users(knn, user_matrix, user_id, n_neighbors)
     # print("Similar users:", similar_user_ids)
 
