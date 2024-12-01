@@ -98,11 +98,12 @@ def restrictions(request):
 
 @login_required(login_url='/YourPalate/login/')
 def results(request):
-
     # running the recommender
-    output = recommender_module.run().name.values
+    similar_users, recommendations = recommender_module.run(user_id=request.user.id)
 
-    return render(request, 'results.html', {'output': output})
+    recommendations_data = recommendations.to_dict(orient='records')
+
+    return render(request, 'results.html', {'output': recommendations_data})
 
 
 @login_required(login_url='/YourPalate/login/')
