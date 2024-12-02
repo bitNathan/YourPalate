@@ -1,6 +1,9 @@
 # YourPalate
 _We could insert link to the website here, as an example. Once we get a stable link._
 
+### Warning
+This project is written uses Django, specifically in development mode as well, this means the admin poage is accessible from the web with no authentication. Do not host in production environments without disabling this in Djanog's settings.
+
 ## Project Abstract
 Meal planning and grocery shopping can be time-consuming and overwhelming tasks, particularly for college students. To address this, we propose YourPalate. 
 
@@ -13,8 +16,24 @@ We implement YourPalate using Django, TensorFlow, and SQL as the primary technol
 Because our project is in debug mode the admin page is not secure, but we'll mention setup while in deployment here
 
 ## User Features
+![image](https://github.com/user-attachments/assets/2fd13542-da9d-48d1-9fc3-a96e482d2c51)
+
+_YourPalate register page_
+
+![image](https://github.com/user-attachments/assets/a4dc1da0-0466-4d3c-9808-a51f62e881b5)
+
+_YourPalate login page_
+
+
 Each user is required to create or log into an account when accessing the website. 
-From there they have the option of selecting restrictions including caloric intake goal, vegetarianism, and time restrictions per meal. In addition, they can complete our preferences quiz which gets their opinions on several representative recipes in order to provide initial recommendations.
+
+![image](https://github.com/user-attachments/assets/e66a8c76-ad4b-487d-8c15-345ddae2bd4d)
+
+From there they have the option of selecting restrictions including caloric intake goal, vegetarianism, and time restrictions per meal. 
+
+![image](https://github.com/user-attachments/assets/6ddcc1b7-932c-4d62-9841-10d2328aeaf6)
+
+In addition, they can complete our preferences quiz which gets their opinions on several representative recipes in order to provide initial recommendations.
 
 Note, if the user tries to generate recommendations without any preferences or restrictions input they will not be tailored to that user's tastes.
 
@@ -31,7 +50,21 @@ To deploy the project...
 5. The website should then be accessible from the http://<DNS_name> which is accessible from the AWS interface
    
 ### Setup/Integrate database
-Still in development, we'll add steps here like above
+For our implimentation of this project we used the AWS RDS web service to host a database using MySQL. The connection details should be stored in a `.env` file in the root direcoty of the project. If the data is properly formatted then you should be able to connect with no other changes.
+
+#### Data
+The data for YourPalate is contained within several tables in our database. (All stored under the parent `User-restrictions`
+- recipes
+   - Contains recipe name, id, prep-time, nutrition info, user description, ingredients list, cooking instructions, and tags we added to aid in recommendation.
+- user_ratings
+   - Dual column table where the first column is recipe IDs and the second is a JSON dictionary of each user that has rated that recipe, and what their rating was.
+- users_restrictions
+   - Contains user ID and the restrictions they've input in that portion of the website.
+- new_users
+   - Another dual column table formatted the same as user_ratings.
+   - Contains user ids and a JSON dictionary of the recipes they've rated alongside the rating itself.
+   - Our initial dataset contained user rating data, which is how we generate our recommendations. This file is where we store new user information during deployment.
+      - There's nothing stopping someone from integrating these two tables together, however more user data means the recommendations take longer to generate. (Though they're likely more accurate as well.) At some point there needs to be logic so as to not constantly increase runtime during deployment.
 
 ## Repository Structure
 
