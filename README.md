@@ -1,8 +1,5 @@
 # YourPalate
-_We could insert link to the website here, as an example. Once we get a stable link._
-
-### Warning
-This project is written uses Django, specifically in "debug" mode as well, this means the admin poage is accessible from the web with no authentication. Do not host in production environments without disabling this in Djanog's settings.
+_We will insert link to the website here, once we get a stable link._
 
 ## Project Abstract
 Meal planning and grocery shopping can be time-consuming and overwhelming tasks, particularly for college students. To address this, we propose YourPalate. 
@@ -11,6 +8,9 @@ Our ECE 49595O senior design project is an open-source web application that auto
 
 Unlike traditional recipe platforms that focus on individual meals, YourPalate integrates user data to produce a balanced and diverse meal schedule that encourages culinary exploration while accommodating time and budget limitations. Additionally, the application offers a seamless user experience with features like ADA-compliant design, downloadable meal plans, and dynamically updated shopping lists. 
 We implement YourPalate using Django, TensorFlow, and SQL as the primary technologies, demonstrating its potential as a valuable tool for enhancing dietary habits and simplifying meal preparation
+
+### Warning
+This project is written uses Django, specifically in "debug" mode as well, this means the admin page is accessible from the web with no authentication. Do not host in production environments without disabling this in Djanog's settings.
 
 ## Admin page
 Because our project is in debug mode the admin page is not secure. It can be acccessed by `<DNS NAME>/admin`as opposed to `<DNS NAME>/YourPalate/etc`.
