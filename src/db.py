@@ -161,19 +161,20 @@ def delete_user_restrictions(user_id):
         conn.close()
 
 
-def add_new_user(user_ratings=None):
+def add_new_user(user_id = None, user_ratings=None):
     conn = create_connection()
-    user_id = None
     try:
         cursor = conn.cursor()
         # Convert user_ratings to JSON string, default to empty JSON object if not provided
         user_ratings_json = json.dumps(user_ratings) if user_ratings else '{}'
         cursor.execute("""
-            INSERT INTO new_users (user_ratings)
-            VALUES (%s);
-        """, (user_ratings_json,))
+            INSERT INTO new_users (id, user_ratings)
+            VALUES (%s, %s)
+            ON DUPLICATE KEY UPDATE user_ratings = VALUES(user_ratings);
+        """, (user_id, user_ratings_json))
         conn.commit()
-        user_id = cursor.lastrowid
+        if user_id is None:
+            user_id = cursor.lastrowid
         print(f"New user added with ID: {user_id}")
     finally:
         cursor.close()
