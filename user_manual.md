@@ -1,11 +1,31 @@
 # User Manual
 ## Generating your First Meal Plan
-Each user must log into YourPalate using their unique username and password before using its features.
-- If you don't yet have an account register an account by following the "Register" button in the login page, and following the subsequent instructions there.
+
+### Logging in
+ Every user is greeted with the login page upon visiting the website. If you have an account, input the associated username and password to access the hone page.
+ 
+![image](https://github.com/user-attachments/assets/a4dc1da0-0466-4d3c-9808-a51f62e881b5)
+
+_YourPalate login page above_
+
+If you don't yet have an account, register by following the "Register" link on the login page, and filling out the fields in the register page shown below.
+
+![image](https://github.com/user-attachments/assets/2fd13542-da9d-48d1-9fc3-a96e482d2c51)
+
+_YourPalate register page above_
 
 Upon successfully logging in, users will be met at our home screen. From here there are three accessible pages, using each is described below.
 
+![image](https://github.com/user-attachments/assets/764a5976-0778-42d8-a680-dbf8bd8899bb)
+
+_YourPalate home page above_
+
 ### Restrictions
+
+![image](https://github.com/user-attachments/assets/e66a8c76-ad4b-487d-8c15-345ddae2bd4d)
+
+_YourPalate restrictions page shown above_
+
 Here, each user is required to provide 
 - The amount of aclories they typically eat, or would like to aim for in the duration of our mealplan. (If you're unsure how many calories you eat, or should be eating, [this Calorie Calculator](https://www.calculator.net/calorie-calculator.html) as a starting point)
 - Any dietary restrictions they wish to accomodate from our dropdown list.
@@ -16,6 +36,11 @@ Each of these preferences is necessary as we filter recipes from our dataset to 
 As soon as you submit them, they are saved in our database in your specific accout.
 
 ### Preferences Quiz
+
+![image](https://github.com/user-attachments/assets/6ddcc1b7-932c-4d62-9841-10d2328aeaf6)
+
+_YourPalate quiz page shown above_
+
 The first time you use our recommendation quiz our algorithm will gather several recipes with the goal of giving you diverse and representative options to best convey your unique palate.
 
 Simply go through each element in the table and select like or dislike. (or don't select anything and we'll keep it neutral)
