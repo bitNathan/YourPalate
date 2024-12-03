@@ -31,7 +31,7 @@ _YourPalate login page above_
 After logging in and creating an account if necessary. The user is directed to our home page. This page contains all the links users need to use the program successfully.
 
 ![image](https://github.com/user-attachments/assets/764a5976-0778-42d8-a680-dbf8bd8899bb)
-_YourPalate home oage shown above_
+_YourPalate home page shown above_
 
 Each user is required to create or log into an account when accessing the website. 
 
