@@ -15,7 +15,7 @@ We implement YourPalate using Django, TensorFlow, and SQL as the primary technol
 ## Admin page
 Because our project is in debug mode the admin page is not secure. It can be acccessed by `<DNS NAME>/admin`as opposed to `<DNS NAME>/YourPalate/etc`.
 
-This can be disabled in the project by going into settings.py (contained within the web development folder) and setting DEBUF_MODE to false. While it is available however, the page provides valuable testing information about users.
+This can be disabled in the project by going into settings.py (contained within the web development folder) and setting DEBUG_MODE to false. While it is available however, the page provides valuable testing information about users.
 
 Here it's possible to see all the accounts that have access through your authentication system, and edit or delete them if necessary.
 
