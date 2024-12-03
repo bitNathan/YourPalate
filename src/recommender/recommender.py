@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from sqlalchemy import create_engine
 from collections import Counter
-import re
+
 
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(project_root))
@@ -77,7 +77,7 @@ def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=100):
 
 def fetch_valid_recipes(engine, recipe_ids):
     recipe_ids_str = ', '.join(map(str, recipe_ids))
-    
+
     query = f"""
         SELECT id, name, Ingredient_amounts, description
         FROM recipes
