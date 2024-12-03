@@ -2,24 +2,50 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'styles/style.css' %}">
 <title>Home</title> 
+
 <section class="home"> 
-        <center> 
-            <font size="6"> 
-                  
-<p> Here are your Meals </p> 
-<font size="4"> 
-    <p> {{output}} </p>
-  
-            </font> 
-            <img src="{% static 'images/logo.png' %}" width="200" height="200"> 
-<font size="6"> 
-    <p> Here is your shopping list </p>  
-    <font size="4"> 
-    {{ shopping_list }}
-        
-    <button onclick="location.href='/YourPalate/home/'" style="border-radius: 12px; padding: 10px 20px; background-color: #f44336; color: white; font-size: 16px;">
-        Back to Home Screen
-    </button>
-            </font> 
-        </center> 
+    <center> 
+        <font size="6"> 
+            <p>Here are your Meals</p> 
+        </font> 
+
+        <table border="1" style="border-collapse: collapse; width: 80%; text-align: left;">
+            <thead>
+                <tr>
+                    <th>Recipe Name</th>
+                    <th>Description</th>
+                    <th>Time to Prepare (minutes)</th>
+                    <th>Calories</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in recommendations %}
+                <tr>
+                    <td>{{ recipe.name }}</td>
+                    <td>{{ recipe.description }}</td>
+                    <td>{{ recipe.minutes }}</td>
+                    <td>{{ recipe.calories }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <img src="{% static 'images/logo.png' %}" width="200" height="200"> 
+
+        <font size="6"> 
+            <p>Here is your shopping list</p>  
+        </font> 
+        <font size="4"> 
+            <ul>
+                {% for item in shopping_list %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </font> 
+
+        <button onclick="location.href='/YourPalate/home/'" 
+                style="border-radius: 12px; padding: 10px 20px; background-color: #f44336; color: white; font-size: 16px;">
+            Back to Home Screen
+        </button>
+    </center> 
 </section>

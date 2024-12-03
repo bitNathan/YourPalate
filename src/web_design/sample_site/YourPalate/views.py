@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 import pandas as pd
+import json
 
 # from authentication tutorial
 # https://www.geeksforgeeks.org/user-authentication-system-using-django/
@@ -101,9 +102,16 @@ def results(request):
     # TODO get user_id from session (same as username)
     similar_users, recommendations, shopping_list = recommender_module.run(user_id=23333)
 
-    # recommendations_data = recommendations.to_dict(orient='records')
+    recommendations_data = recommendations[['name', 'description', 'minutes', 'nutrition']].copy()
+    recommendations_data['calories'] = recommendations_data['nutrition'].apply(
+        lambda x: json.loads(x)[0] if isinstance(x, str) else 0)
+    recommendations_data = recommendations_data[['name', 'description',
+                                                 'minutes', 'calories']].to_dict(orient='records')
 
-    return render(request, 'results.html', {'output': recommendations, 'shopping_list': shopping_list})
+    return render(request, 'results.html', {
+        'recommendations': recommendations_data,
+        'shopping_list': shopping_list
+    })
 
 
 @login_required(login_url='/YourPalate/login/')
