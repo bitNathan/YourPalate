@@ -6,6 +6,8 @@ import json
 import sys
 from pathlib import Path
 from sqlalchemy import create_engine
+from collections import Counter
+
 
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(project_root))
@@ -73,7 +75,45 @@ def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=100):
     return recommended_recipes
 
 
-def run(user_id=23333, n_neighbors=10):
+def fetch_valid_recipes(engine, recipe_ids):
+    recipe_ids_str = ', '.join(map(str, recipe_ids))
+
+    query = f"""
+        SELECT id, name, Ingredient_amounts, description
+        FROM recipes
+        WHERE id IN ({recipe_ids_str});
+    """
+    return pd.read_sql(query, engine)
+
+
+def clean_ingredient(ingredient):
+    """Cleans up an ingredient string by removing brackets and quotes."""
+    return ingredient.strip("[]'\"").strip()
+
+
+def generate_shopping_list(recipe_details):
+    """Create a shopping list file based on the ingredients of recommended recipes."""
+    shopping_list = []
+
+    for i in recipe_details["Ingredient_amounts"]:
+        cleaned_i = clean_ingredient(i)
+        shopping_list.append(cleaned_i)
+
+    grouped_ingredients = Counter(shopping_list)
+
+    presentable_list = []
+    for ingredient, count in grouped_ingredients.items():
+        if count > 1:
+            presentable_list.append(f"{count} x {ingredient}")
+        else:
+            presentable_list.append(ingredient)
+
+    presentable_list.sort()
+
+    return presentable_list
+
+
+def run(user_id=23333, n_neighbors=100):
     project_root = Path(__file__).parent.parent.parent
 
     # print("Loading recipe ratings...")
@@ -93,23 +133,34 @@ def run(user_id=23333, n_neighbors=10):
     # print("Similar users:", similar_user_ids)
 
     # print("Generating recommendations...")
-    recommendations = get_top_recipes_from_similar_users(ratings, similar_user_ids)
+    recommended_recipe_ids = get_top_recipes_from_similar_users(ratings, similar_user_ids)
 
-    recommendations_list = ", ".join(map(str, recommendations))
+    recommendations_list = ", ".join(map(str, recommended_recipe_ids))
+    print(f"Recommendations for user {user_id}: {recommendations_list}")
 
-    # TODO
-    # Display the recommendations names, ingredients, descriptions via SQL
+    print("Fetching recipe details...")
+    # Initialize the database connection
+    db_url = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    engine = create_engine(db_url)
 
-    # TODO
-    # Make shopping list file via SQL
+    # Fetch details for all recommended recipes
+    all_recipe_details_df = fetch_valid_recipes(engine, recommended_recipe_ids)
 
-    return similar_user_ids, recommendations_list
+    print("All recipe details:", all_recipe_details_df)
+
+    print("Generating shopping list...")
+    shopping_list = generate_shopping_list(all_recipe_details_df)
+
+    print("Recommendations fetched successfully.")
+
+    return similar_user_ids, all_recipe_details_df, shopping_list
 
 
 if __name__ == '__main__':
     start_time = time.time()
     print("Running the recommender...")
-    similar_users, recommendations = run(user_id=23333)
+    similar_users, recommendations, shopping_list = run(user_id=23333)
     print("Recommendations generated in %s seconds" % (time.time() - start_time))
     print("Similar users:", similar_users)
     print("Recommended recipes:", recommendations)
+    print("Shopping list:", shopping_list)

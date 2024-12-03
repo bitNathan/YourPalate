@@ -8,13 +8,14 @@
                   
 <p> Here are your Meals </p> 
 <font size="4"> 
-    <!-- output -->
     <p> {{output}} </p>
   
             </font> 
             <img src="{% static 'images/logo.png' %}" width="200" height="200"> 
 <font size="6"> 
     <p> Here is your shopping list </p>  
+    <font size="4"> 
+    {{ shopping_list }}
         
     <button onclick="location.href='/YourPalate/home/'" style="border-radius: 12px; padding: 10px 20px; background-color: #f44336; color: white; font-size: 16px;">
         Back to Home Screen
