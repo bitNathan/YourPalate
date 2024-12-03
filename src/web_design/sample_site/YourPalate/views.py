@@ -59,14 +59,14 @@ def quiz(request):
             recipe['description'] = 'Sorry! We couldn\'t find a description in our database.'
         recipes.append([recipe['id'], recipe['name'], recipe['description']])
 
-    # print("recipes: ", recipes)
+    # print("quiz recipes: ", recipes)
     return render(request, 'quiz.html', {'recipes': recipes})
 
 
 @login_required(login_url='/YourPalate/login/')
 def save_preferences(request):
-    # TODO save to sql database under user
     if request.method == 'POST':
+        # assertions
         # preferences = list of 'like' / 'dislike' / '' in order of presentation
         preferences = request.POST.getlist('preferences')
         recipes = request.POST.getlist('recipes')
@@ -76,17 +76,15 @@ def save_preferences(request):
             print("preferences:", len(preferences))
             print("recipes:", len(recipes))
             raise ValueError("Length of preferences and recipes must be the same")
-        print('debugging info for save_preferences')
-        # print("preferences: ", preferences)
         # print("recipes: ", recipes)
 
-        likes = [int(recipe['id']) for recipe in recipes if preferences[recipes.index(recipe)] == 'likes']
-        dislikes = [int(recipe['id']) for recipe in recipes if preferences[recipes.index(recipe)] == 'dislikes']
-
-        print("likes: ", likes)
-        print("dislikes: ", dislikes)
-        print("recipes: ", recipes)
-
+        # print("preferences: ", preferences)
+        likes_ids = [recipes[i] for i in range(len(preferences)) if preferences[i] == 'like']
+        dislikes_ids = [recipes[i] for i in range(len(preferences)) if preferences[i] == 'dislike']
+        print("type: ", type(likes_ids))
+        print("likes: ", likes_ids)
+        print("dislikes: ", dislikes_ids)
+    # always redirect to home page
     return redirect('/YourPalate/home/')
 
 
