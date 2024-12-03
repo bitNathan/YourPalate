@@ -8,7 +8,6 @@ from pathlib import Path
 from sqlalchemy import create_engine
 from collections import Counter
 
-
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(project_root))
 
@@ -75,15 +74,43 @@ def get_top_recipes_from_similar_users(ratings, similar_user_ids, n=100):
     return recommended_recipes
 
 
-def fetch_valid_recipes(engine, recipe_ids):
-    recipe_ids_str = ', '.join(map(str, recipe_ids))
-
-    query = f"""
-        SELECT id, name, Ingredient_amounts, description
-        FROM recipes
-        WHERE id IN ({recipe_ids_str});
+def fetch_filtered_recipes(engine, user_id, recipe_ids):
+    user_query = f"""
+        SELECT vegetarian, calories, max_time
+        FROM users_restrictions
+        WHERE id = {user_id};
     """
-    return pd.read_sql(query, engine)
+    user_restrictions = pd.read_sql(user_query, engine)
+
+    if user_restrictions.empty:
+        recipe_ids_str = ', '.join(map(str, recipe_ids))
+        recipe_query = f"""
+            SELECT id, name, Ingredient_amounts, description, nutrition, minutes
+            FROM recipes
+            WHERE id IN ({recipe_ids_str});
+        """
+        print(f"No restrictions found for user ID {user_id}. Fetching all recipes.")
+        return pd.read_sql(recipe_query, engine)
+
+    user_restrictions = user_restrictions.iloc[0]
+    vegetarian = user_restrictions["vegetarian"]
+    calories_per_meal = user_restrictions["calories"] // 3
+    calorie_min = 0
+    calorie_max = calories_per_meal
+    max_time = user_restrictions["max_time"]
+    time_min = 0
+    time_max = max_time
+
+    print(f"Restrictions -- Calories: {calories_per_meal}, Veg: {vegetarian}, Time: {max_time}")
+    recipe_query = f"""
+        SELECT id, name, Ingredient_amounts, description, nutrition, minutes
+        FROM recipes
+        WHERE id IN ({', '.join(map(str, recipe_ids))})
+          AND CAST(JSON_EXTRACT(nutrition, '$[0]') AS UNSIGNED) BETWEEN {calorie_min} AND {calorie_max}
+          AND minutes BETWEEN {time_min} AND {time_max}
+          {"AND vegetarian = 1" if vegetarian else ""};
+    """
+    return pd.read_sql(recipe_query, engine)
 
 
 def clean_ingredient(ingredient):
@@ -144,7 +171,7 @@ def run(user_id=23333, n_neighbors=100):
     engine = create_engine(db_url)
 
     # Fetch details for all recommended recipes
-    all_recipe_details_df = fetch_valid_recipes(engine, recommended_recipe_ids)
+    all_recipe_details_df = fetch_filtered_recipes(engine, user_id, recommended_recipe_ids)
 
     print("All recipe details:", all_recipe_details_df)
 
