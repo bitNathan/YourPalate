@@ -2,7 +2,7 @@
 _We could insert link to the website here, as an example. Once we get a stable link._
 
 ### Warning
-This project is written uses Django, specifically in development mode as well, this means the admin poage is accessible from the web with no authentication. Do not host in production environments without disabling this in Djanog's settings.
+This project is written uses Django, specifically in "debug" mode as well, this means the admin poage is accessible from the web with no authentication. Do not host in production environments without disabling this in Djanog's settings.
 
 ## Project Abstract
 Meal planning and grocery shopping can be time-consuming and overwhelming tasks, particularly for college students. To address this, we propose YourPalate. 
@@ -13,7 +13,11 @@ Unlike traditional recipe platforms that focus on individual meals, YourPalate i
 We implement YourPalate using Django, TensorFlow, and SQL as the primary technologies, demonstrating its potential as a valuable tool for enhancing dietary habits and simplifying meal preparation
 
 ## Admin page
-Because our project is in debug mode the admin page is not secure, but we'll mention setup while in deployment here
+Because our project is in debug mode the admin page is not secure. It can be acccessed by `<DNS NAME>/admin`as opposed to `<DNS NAME>/YourPalate/etc`.
+
+This can be disabled in the project by going into settings.py (contained within the web development folder) and setting DEBUF_MODE to false. While it is available however, the page provides valuable testing information about users.
+
+Here it's possible to see all the accounts that have access through your authentication system, and edit or delete them if necessary.
 
 ## User Features
 ![image](https://github.com/user-attachments/assets/2fd13542-da9d-48d1-9fc3-a96e482d2c51)
@@ -24,6 +28,10 @@ _YourPalate register page above_
 
 _YourPalate login page above_
 
+After logging in and creating an account if necessary. The user is directed to our home page. This page contains all the links users need to use the program successfully.
+
+![image](https://github.com/user-attachments/assets/764a5976-0778-42d8-a680-dbf8bd8899bb)
+_YourPalate home oage shown above_
 
 Each user is required to create or log into an account when accessing the website. 
 
