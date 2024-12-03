@@ -1,7 +1,6 @@
-from sqlalchemy import create_engine, Column, Integer, String, Boolean, JSON, Table, MetaData, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, Boolean, JSON, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.exc import IntegrityError
 import pandas as pd
 import os
 import json
@@ -218,10 +217,10 @@ def test_add_and_update_users():
 
     print("\n--- Initializing Database ---")
     initialize_database()
-    
+
     # Example external user ID
     user_id = 102
-    
+
     # Add user to `users_restrictions`
     print("\n--- Adding User to users_restrictions ---")
     add_success_restrictions = add_user_restrictions(
