@@ -19,7 +19,6 @@ import os
 module_path = Path(__file__).resolve().parent.parent.parent.parent / 'recommender'
 # print("module_path: ", module_path)
 
-# TODO cant test right now because of data issues
 # make sure first line imports correctly
 spec = importlib.util.spec_from_file_location('recommender', os.path.join(module_path, 'recommender.py'))
 recommender_module = importlib.util.module_from_spec(spec)
@@ -34,7 +33,7 @@ spec.loader.exec_module(questionnaire_module)
 
 @login_required(login_url='/YourPalate/login/')
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'username': request.user.username})
 
 
 @login_required(login_url='/YourPalate/login/')
