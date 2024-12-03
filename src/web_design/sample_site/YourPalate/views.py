@@ -101,7 +101,7 @@ def save_preferences(request):
         if (existing_user_ratings is None):
             db_module.add_new_user(user_id=23333, user_ratings=preferences_json)
         else:
-            db_module.update_new_user_ratings(user_id=23333, user_ratings=preferences_json)
+            db_module.update_new_user_ratings(user_id=23333, new_ratings=preferences_json)
     
     # always redirect to home page
     return redirect('/YourPalate/home/')
