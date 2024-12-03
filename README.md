@@ -18,20 +18,24 @@ Because our project is in debug mode the admin page is not secure, but we'll men
 ## User Features
 ![image](https://github.com/user-attachments/assets/2fd13542-da9d-48d1-9fc3-a96e482d2c51)
 
-_YourPalate register page_
+_YourPalate register page above_
 
 ![image](https://github.com/user-attachments/assets/a4dc1da0-0466-4d3c-9808-a51f62e881b5)
 
-_YourPalate login page_
+_YourPalate login page above_
 
 
 Each user is required to create or log into an account when accessing the website. 
 
 ![image](https://github.com/user-attachments/assets/e66a8c76-ad4b-487d-8c15-345ddae2bd4d)
 
+_YourPalate restrictions page shown above_
+
 From there they have the option of selecting restrictions including caloric intake goal, vegetarianism, and time restrictions per meal. 
 
 ![image](https://github.com/user-attachments/assets/6ddcc1b7-932c-4d62-9841-10d2328aeaf6)
+
+_YourPalate quiz page shown above_
 
 In addition, they can complete our preferences quiz which gets their opinions on several representative recipes in order to provide initial recommendations.
 
