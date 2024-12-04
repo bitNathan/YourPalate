@@ -222,7 +222,7 @@ def add_new_user(username, user_ratings=None):
     if user_id is None:
         print(f"Error: Username {username} does not exist in user_lookup table.")
         add_user_to_lookup_table(username)
-        return None
+        user_id = get_user_id_by_username(username)
 
     conn = create_connection()
     try:
@@ -231,10 +231,10 @@ def add_new_user(username, user_ratings=None):
         user_ratings_json = json.dumps(user_ratings) if user_ratings else '{}'
         # Check if user_id exists in users_restrictions
 
-        user_restrictions = get_user_restrictions(username)
-        if user_restrictions is None:
-            print(f"User ID {user_id} not found in users_restrictions. Adding user to users_restrictions.")
-            add_user_restrictions(username, vegetarian=False, calories=0, max_time=0)
+        # user_restrictions = get_user_restrictions(username)
+        # if user_restrictions is None:
+        #     print(f"User ID {user_id} not found in users_restrictions. Adding user to users_restrictions.")
+        #     add_user_restrictions(username, vegetarian=False, calories=0, max_time=0)
 
         print(f"Attempting to add user with ID: {user_id} and ratings: {user_ratings_json}")
         cursor.execute("""
