@@ -56,8 +56,6 @@ def quiz(request):
 
     selected_recipes = questionnaire_module.get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
 
-    # TODO output all lowercase, would be ncie to uppercase some words
-    # maybe do in the data itself rather than here to reduce runtime
     recipes = []
     for recipe in selected_recipes['all_selected_recipes']:
         # replace if description not there or too short
@@ -92,16 +90,17 @@ def save_preferences(request):
         # print("dislikes: ", dislikes_ids)
         
         # save likes and dislikes to database
-        existing_user_ratings = db_module.get_new_user_ratings(user_id=23333)
+        existing_user_ratings = db_module.get_new_user_ratings(username=request.user.username)
         preferences_json = {recipe_id: 5 for recipe_id in likes_ids}
         preferences_json.update({recipe_id: 1 for recipe_id in dislikes_ids})
         
         # print("preferences_json: ", preferences_json)
         
         if (existing_user_ratings is None):
-            db_module.add_new_user(user_id=23333, user_ratings=preferences_json)
+            # user_id = db_module.add_user_restrictions(vegetarian=False, calories=2000, max_time=60)  # Example values
+            db_module.add_new_user(username=request.user.username, user_ratings=preferences_json)
         else:
-            db_module.update_new_user_ratings(user_id=23333, new_ratings=preferences_json)
+            db_module.update_new_user_ratings(username=request.user.username, new_ratings=preferences_json)
     
     # always redirect to home page
     return redirect('/YourPalate/home/')
@@ -116,7 +115,7 @@ def restrictions(request):
 def results(request):
     # running the recommender
     # TODO get user_id from session (same as username)
-    similar_users, recommendations, shopping_list = recommender_module.run(user_id=23333)
+    similar_users, recommendations, shopping_list = recommender_module.run(user_id=request.user.username)
 
     # recommendations_data = recommendations.to_dict(orient='records')
 

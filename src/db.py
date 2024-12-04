@@ -62,10 +62,11 @@ def initialize_database():
         # Create new table for new users
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS new_users (
-                id INT AUTO_INCREMENT PRIMARY KEY,
+                id INT PRIMARY KEY,
                 user_ratings JSON NOT NULL
             );
         """)
+        # FOREIGN KEY (id) REFERENCES users_restrictions(id) ON DELETE CASCADE
 
         conn.commit()
         print("Table 'users_restrictions' created")
@@ -75,17 +76,56 @@ def initialize_database():
         conn.close()
 
 
-def add_user_restrictions(vegetarian, calories, max_time):
+def get_user_id_by_username(username):
     conn = create_connection()
     user_id = None
     try:
         cursor = conn.cursor()
         cursor.execute("""
-            INSERT INTO users_restrictions (vegetarian, calories, max_time)
-            VALUES (%s, %s, %s);
-        """, (vegetarian, calories, max_time))
+            SELECT id FROM user_lookup WHERE username = %s;
+        """, (username,))
+        result = cursor.fetchone()
+        if result:
+            user_id = result[0]
+    finally:
+        cursor.close()
+        conn.close()
+    return user_id
+
+def add_user_to_lookup_table(username):
+    conn = create_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO user_lookup (username)
+            VALUES (%s);
+        """, (username,))
         conn.commit()
-        user_id = cursor.lastrowid
+        print(f"User '{username}' added to user_lookup table.")
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+    finally:
+        cursor.close()
+        conn.close()
+
+
+def add_user_restrictions(username, vegetarian, calories, max_time):
+    # Check if user exists in user_lookup table
+    user_id = get_user_id_by_username(username)
+    if user_id is None:
+        print(f"Error: Username {username} did not exist in user_lookup table.")
+        print(f"Adding user '{username}' to user_lookup table.")
+        add_user_to_lookup_table(username)
+        user_id = get_user_id_by_username(username)
+    
+    conn = create_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO users_restrictions (id, vegetarian, calories, max_time)
+            VALUES (%s, %s, %s, %s);
+        """, (user_id, vegetarian, calories, max_time))
+        conn.commit()
         print(f"User added with ID: {user_id}")
     finally:
         cursor.close()
@@ -93,7 +133,12 @@ def add_user_restrictions(vegetarian, calories, max_time):
     return user_id
 
 
-def get_user_restrictions(user_id):
+def get_user_restrictions(username):
+    user_id = get_user_id_by_username(username)
+    if user_id is None:
+        print(f"Error: Username {username} does not exist in user_lookup table.")
+        return None
+
     conn = create_connection()
     user_data = None
     try:
@@ -108,7 +153,12 @@ def get_user_restrictions(user_id):
     return user_data
 
 
-def update_user_restrictions(user_id, vegetarian=None, calories=None, max_time=None):
+def update_user_restrictions(username, vegetarian=None, calories=None, max_time=None):
+    user_id = get_user_id_by_username(username)
+    if user_id is None:
+        print(f"Error: Username {username} does not exist in user_lookup table.")
+        return 0
+
     conn = create_connection()
     try:
         cursor = conn.cursor()
@@ -146,7 +196,12 @@ def update_user_restrictions(user_id, vegetarian=None, calories=None, max_time=N
         conn.close()
 
 
-def delete_user_restrictions(user_id):
+def delete_user_restrictions(username):
+    user_id = get_user_id_by_username(username)
+    if user_id is None:
+        print(f"Error: Username {username} does not exist in user_lookup table.")
+        return False
+
     conn = create_connection()
     try:
         cursor = conn.cursor()
@@ -161,21 +216,34 @@ def delete_user_restrictions(user_id):
         conn.close()
 
 
-def add_new_user(user_id = None, user_ratings=None):
+def add_new_user(username, user_ratings=None):
+    user_id = get_user_id_by_username(username)
+    if user_id is None:
+        print(f"Error: Username {username} does not exist in user_lookup table.")
+        add_user_to_lookup_table(username)
+        return None
+
     conn = create_connection()
     try:
         cursor = conn.cursor()
         # Convert user_ratings to JSON string, default to empty JSON object if not provided
         user_ratings_json = json.dumps(user_ratings) if user_ratings else '{}'
+        # Check if user_id exists in users_restrictions
+        
+        user_restrictions = get_user_restrictions(username)
+        if user_restrictions is None:
+            print(f"User ID {user_id} not found in users_restrictions. Adding user to users_restrictions.")
+            add_user_restrictions(username, vegetarian=False, calories=0, max_time=0)
+        
+        print(f"Attempting to add user with ID: {user_id} and ratings: {user_ratings_json}")
         cursor.execute("""
             INSERT INTO new_users (id, user_ratings)
-            VALUES (%s, %s)
-            ON DUPLICATE KEY UPDATE user_ratings = VALUES(user_ratings);
+            VALUES (%s, %s);
         """, (user_id, user_ratings_json))
         conn.commit()
-        if user_id is None:
-            user_id = cursor.lastrowid
         print(f"New user added with ID: {user_id}")
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
     finally:
         cursor.close()
         conn.close()
@@ -183,7 +251,12 @@ def add_new_user(user_id = None, user_ratings=None):
     return user_id
 
 
-def update_new_user_ratings(user_id, new_ratings):
+def update_new_user_ratings(username, new_ratings):
+    user_id = get_user_id_by_username(username)
+    if user_id is None:
+        print(f"Error: Username {username} does not exist in user_lookup table.")
+        return False
+
     conn = create_connection()
     try:
         # Fetch the current ratings
@@ -215,7 +288,12 @@ def update_new_user_ratings(user_id, new_ratings):
         conn.close()
 
 
-def get_new_user_ratings(user_id):
+def get_new_user_ratings(username):
+    user_id = get_user_id_by_username(username)
+    if user_id is None:
+        print(f"Error: Username {username} does not exist in user_lookup table.")
+        return None
+
     conn = create_connection()
     try:
         cursor = conn.cursor(dictionary=True)
