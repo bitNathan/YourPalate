@@ -92,6 +92,7 @@ def get_user_id_by_username(username):
         conn.close()
     return user_id
 
+
 def add_user_to_lookup_table(username):
     conn = create_connection()
     try:
@@ -117,7 +118,7 @@ def add_user_restrictions(username, vegetarian, calories, max_time):
         print(f"Adding user '{username}' to user_lookup table.")
         add_user_to_lookup_table(username)
         user_id = get_user_id_by_username(username)
-    
+
     conn = create_connection()
     try:
         cursor = conn.cursor()
@@ -229,12 +230,12 @@ def add_new_user(username, user_ratings=None):
         # Convert user_ratings to JSON string, default to empty JSON object if not provided
         user_ratings_json = json.dumps(user_ratings) if user_ratings else '{}'
         # Check if user_id exists in users_restrictions
-        
+
         user_restrictions = get_user_restrictions(username)
         if user_restrictions is None:
             print(f"User ID {user_id} not found in users_restrictions. Adding user to users_restrictions.")
             add_user_restrictions(username, vegetarian=False, calories=0, max_time=0)
-        
+
         print(f"Attempting to add user with ID: {user_id} and ratings: {user_ratings_json}")
         cursor.execute("""
             INSERT INTO new_users (id, user_ratings)

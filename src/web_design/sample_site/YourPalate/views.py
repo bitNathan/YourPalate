@@ -26,7 +26,8 @@ sys.modules['recommender'] = recommender_module
 spec.loader.exec_module(recommender_module)
 
 # importing questionnaire
-spec = importlib.util.spec_from_file_location('questionnaire', os.path.join(module_path, 'recommender', 'questionnaire.py'))
+spec = importlib.util.spec_from_file_location(
+    'questionnaire', os.path.join(module_path, 'recommender', 'questionnaire.py'))
 questionnaire_module = importlib.util.module_from_spec(spec)
 sys.modules['questionnaire'] = questionnaire_module
 spec.loader.exec_module(questionnaire_module)
@@ -36,6 +37,7 @@ spec = importlib.util.spec_from_file_location('db', os.path.join(module_path, 'd
 db_module = importlib.util.module_from_spec(spec)
 sys.modules['db'] = db_module
 spec.loader.exec_module(db_module)
+
 
 @login_required(login_url='/YourPalate/login/')
 def home(request):
@@ -88,20 +90,20 @@ def save_preferences(request):
         # print("type: ", type(likes_ids))
         # print("likes: ", likes_ids)
         # print("dislikes: ", dislikes_ids)
-        
+
         # save likes and dislikes to database
         existing_user_ratings = db_module.get_new_user_ratings(username=request.user.username)
         preferences_json = {recipe_id: 5 for recipe_id in likes_ids}
         preferences_json.update({recipe_id: 1 for recipe_id in dislikes_ids})
-        
+
         # print("preferences_json: ", preferences_json)
-        
+
         if (existing_user_ratings is None):
             # user_id = db_module.add_user_restrictions(vegetarian=False, calories=2000, max_time=60)  # Example values
             db_module.add_new_user(username=request.user.username, user_ratings=preferences_json)
         else:
             db_module.update_new_user_ratings(username=request.user.username, new_ratings=preferences_json)
-    
+
     # always redirect to home page
     return redirect('/YourPalate/home/')
 
