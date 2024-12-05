@@ -1,25 +1,50 @@
-{% include 'logobar.html' %} 
+{% include 'logobar.html' %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'styles/style.css' %}">
-<title>Home</title> 
-<section class="home"> 
-        <center> 
-            <font size="6"> 
-                  
-<p> Here are your Meals </p> 
-<font size="4"> 
-    <p> {{output}} </p>
-  
-            </font> 
-            <img src="{% static 'images/logo.png' %}" width="200" height="200"> 
-<font size="6"> 
-    <p> Here is your shopping list </p>  
-    <font size="4"> 
-    {{ shopping_list }}
-        
-    <button onclick="location.href='/YourPalate/home/'" style="border-radius: 12px; padding: 10px 20px; background-color: #f44336; color: white; font-size: 16px;">
-        Back to Home Screen
-    </button>
-            </font> 
-        </center> 
+<title>Home</title>
+
+<section class="home">
+    <center>
+        <font size="6">
+            <p>Here are your Recommended Meals:</p>
+        </font>
+
+        <table border="1" style="width:97%; text-align:left; font-size: 22px; margin-left:auto; margin-right:auto; color: white;">
+            <thead>
+                <tr>
+                    <th>Recipe Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in recommendations %}
+                <tr>
+                    <td>{{ recipe.name }}</td>
+                    <td>{{ recipe.description }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <img src="{% static 'images/logo.png' %}" width="200" height="200">
+
+        <font size="6">
+            <p>Here is your shopping list:</p>
+        </font>
+
+        <a href="?download=true">
+            <button style="border-radius: 12px; padding: 10px 20px; background-color: #4CAF50; color: white; font-size: 16px;">
+                Click Here to Download Your Shopping List PDF!
+            </button>
+        </a>
+        <br>
+        <br>
+        <br>
+        <button onclick="location.href='/YourPalate/home/'"
+                style="border-radius: 12px; padding: 10px 20px; background-color: #f44336; color: white; font-size: 16px;">
+            Back to Home Screen
+        </button>
+    </center>
 </section>

@@ -10,3 +10,4 @@ mysql.connector
 python-dotenv
 sqlalchemy
 pymysql
+reportlab
