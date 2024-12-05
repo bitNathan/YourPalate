@@ -37,7 +37,7 @@
             <th>Preference</th>
         </tr>
         {% for recipe in recipes %}
-            <input type="hidden" name="recipes" value=recipe>
+            <input type="hidden" name="recipes" value="{{ recipe.0 }}">
             {% for attr in recipe|slice:"-2:" %}
             <td>{{ attr }}</td>
             {% endfor %}

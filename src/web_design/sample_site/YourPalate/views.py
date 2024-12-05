@@ -18,19 +18,27 @@ from pathlib import Path
 import importlib.util
 import os
 
-module_path = Path(__file__).resolve().parent.parent.parent.parent / 'recommender'
+module_path = Path(__file__).resolve().parent.parent.parent.parent
 # print("module_path: ", module_path)
 
 # make sure first line imports correctly
-spec = importlib.util.spec_from_file_location('recommender', os.path.join(module_path, 'recommender.py'))
+spec = importlib.util.spec_from_file_location('recommender', os.path.join(module_path, 'recommender', 'recommender.py'))
 recommender_module = importlib.util.module_from_spec(spec)
 sys.modules['recommender'] = recommender_module
 spec.loader.exec_module(recommender_module)
 
-spec = importlib.util.spec_from_file_location('questionnaire', os.path.join(module_path, 'questionnaire.py'))
+# importing questionnaire
+spec = importlib.util.spec_from_file_location(
+    'questionnaire', os.path.join(module_path, 'recommender', 'questionnaire.py'))
 questionnaire_module = importlib.util.module_from_spec(spec)
 sys.modules['questionnaire'] = questionnaire_module
 spec.loader.exec_module(questionnaire_module)
+
+# importing db
+spec = importlib.util.spec_from_file_location('db', os.path.join(module_path, 'db.py'))
+db_module = importlib.util.module_from_spec(spec)
+sys.modules['db'] = db_module
+spec.loader.exec_module(db_module)
 
 
 def generate_shopping_list_pdf(shopping_list):
@@ -75,8 +83,6 @@ def quiz(request):
 
     selected_recipes = questionnaire_module.get_recipes_for_review(groups, group_weights=group_weights, num_recipes=10)
 
-    # TODO output all lowercase, would be ncie to uppercase some words
-    # maybe do in the data itself rather than here to reduce runtime
     recipes = []
     for recipe in selected_recipes['all_selected_recipes']:
         # replace if description not there or too short
@@ -84,14 +90,14 @@ def quiz(request):
             recipe['description'] = 'Sorry! We couldn\'t find a description in our database.'
         recipes.append([recipe['id'], recipe['name'], recipe['description']])
 
-    # print("recipes: ", recipes)
+    # print("quiz recipes: ", recipes)
     return render(request, 'quiz.html', {'recipes': recipes})
 
 
 @login_required(login_url='/YourPalate/login/')
 def save_preferences(request):
-    # TODO save to sql database under user
     if request.method == 'POST':
+        # assertions
         # preferences = list of 'like' / 'dislike' / '' in order of presentation
         preferences = request.POST.getlist('preferences')
         recipes = request.POST.getlist('recipes')
@@ -101,17 +107,29 @@ def save_preferences(request):
             print("preferences:", len(preferences))
             print("recipes:", len(recipes))
             raise ValueError("Length of preferences and recipes must be the same")
-        print('debugging info for save_preferences')
-        # print("preferences: ", preferences)
         # print("recipes: ", recipes)
 
-        likes = [int(recipe['id']) for recipe in recipes if preferences[recipes.index(recipe)] == 'likes']
-        dislikes = [int(recipe['id']) for recipe in recipes if preferences[recipes.index(recipe)] == 'dislikes']
+        # print("preferences: ", preferences)
+        likes_ids = [int(recipes[i]) for i in range(len(preferences)) if preferences[i] == 'like']
+        dislikes_ids = [int(recipes[i]) for i in range(len(preferences)) if preferences[i] == 'dislike']
+        # print("type: ", type(likes_ids))
+        # print("likes: ", likes_ids)
+        # print("dislikes: ", dislikes_ids)
 
-        print("likes: ", likes)
-        print("dislikes: ", dislikes)
-        print("recipes: ", recipes)
+        # save likes and dislikes to database
+        existing_user_ratings = db_module.get_new_user_ratings(username=request.user.username)
+        preferences_json = {recipe_id: 5 for recipe_id in likes_ids}
+        preferences_json.update({recipe_id: 1 for recipe_id in dislikes_ids})
 
+        # print("preferences_json: ", preferences_json)
+
+        if (existing_user_ratings is None):
+            # user_id = db_module.add_user_restrictions(vegetarian=False, calories=2000, max_time=60)  # Example values
+            db_module.add_new_user(username=request.user.username, user_ratings=preferences_json)
+        else:
+            db_module.update_new_user_ratings(username=request.user.username, new_ratings=preferences_json)
+
+    # always redirect to home page
     return redirect('/YourPalate/home/')
 
 
@@ -122,8 +140,10 @@ def restrictions(request):
 
 @login_required(login_url='/YourPalate/login/')
 def results(request):
-    # Running the recommender
-    similar_users, recommendations, shopping_list = recommender_module.run(user_id=23333)
+
+    # running the recommender\
+    similar_users, recommendations, shopping_list = recommender_module.run(user_id=request.user.username)
+
 
     # Check if the request is for downloading the shopping list PDF
     if 'download' in request.GET:
