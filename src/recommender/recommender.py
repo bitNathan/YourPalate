@@ -52,6 +52,10 @@ def create_user_matrix(ratings, expected_features=None):
 
 def get_similar_users(knn, user_matrix, user_id, n_neighbors=5):
     user_vector_dict = get_new_user_ratings(user_id)
+    if (user_vector_dict is None or len(user_vector_dict) == 0):
+        print(f"WARNING: User {user_id} not found in user ratings table.")
+        print("defaulting to user_id 23333")
+        user_vector_dict = get_new_user_ratings(23333)
 
     # Convert user_vector_dict to a list of values in the same order as user_matrix columns
     user_vector = [user_vector_dict.get(str(recipe_id), 0) for recipe_id in user_matrix.columns]
@@ -144,12 +148,12 @@ def generate_shopping_list(recipe_details):
 
 def run(username=None, n_neighbors=100):
     if username is None:
-        user_id = 23333
+        user_id = 5
     else:
         user_id = get_user_id_by_username(username)
     if user_id is None:
         print(f"WARNING: Username {username} not found in user lookup table.\n  Defaulting to user_id 23333.")
-        user_id = 23333
+        user_id = 5
     project_root = Path(__file__).parent.parent.parent
 
     # print("Loading recipe ratings...")
