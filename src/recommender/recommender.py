@@ -121,8 +121,9 @@ def run(username=None, n_neighbors=100):
         user_id = 23333
     else:
         user_id = get_user_id_by_username(username)
-        if user_id is None:
-            raise ValueError(f"Username {username} not found in user lookup table.")
+    if user_id is None:
+        print(f"WARNING: Username {username} not found in user lookup table.\n  Defaulting to user_id 23333.")
+        user_id = 23333
     project_root = Path(__file__).parent.parent.parent
 
     # print("Loading recipe ratings...")
