@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 import pandas as pd
-import json
 from django.http import FileResponse
 
 # from authentication tutorial
@@ -11,7 +10,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from django.http import FileResponse
 import io
 
 # importing recommender
@@ -34,6 +32,7 @@ questionnaire_module = importlib.util.module_from_spec(spec)
 sys.modules['questionnaire'] = questionnaire_module
 spec.loader.exec_module(questionnaire_module)
 
+
 def generate_shopping_list_pdf(shopping_list):
     """Generate a PDF containing the shopping list."""
 
@@ -55,6 +54,7 @@ def generate_shopping_list_pdf(shopping_list):
     buffer.seek(0)
 
     return buffer
+
 
 @login_required(login_url='/YourPalate/login/')
 def home(request):

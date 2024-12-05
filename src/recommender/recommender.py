@@ -134,7 +134,7 @@ def run(user_id=23333, n_neighbors=100):
     # print("Generating recommendations...")
     recommended_recipe_ids = get_top_recipes_from_similar_users(ratings, similar_user_ids)
 
-    recommendations_list = ", ".join(map(str, recommended_recipe_ids))
+    # recommendations_list = ", ".join(map(str, recommended_recipe_ids))
     # print(f"Recommendations for user {user_id}: {recommendations_list}")
 
     # print("Fetching recipe details...")
@@ -146,9 +146,9 @@ def run(user_id=23333, n_neighbors=100):
     all_recipe_details_df = fetch_valid_recipes(engine, recommended_recipe_ids)
 
     all_recipe_details_df = all_recipe_details_df.sample(frac=1, random_state=42).reset_index(drop=True)
-    
+
     first_21 = all_recipe_details_df[:21]
-    
+
     recommendations = (
         first_21[['name', 'description']]
         .dropna()  # Remove rows with missing values for 'name' or 'description'
