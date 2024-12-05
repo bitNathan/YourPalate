@@ -114,6 +114,44 @@ def restrictions(request):
 
 
 @login_required(login_url='/YourPalate/login/')
+def save_restrictions(request):
+    if request.method == 'POST':
+        dietary_restrictions = request.POST.get('dietary_restrictions')
+        time_restrictions = request.POST.get('time_restrictions')
+        caloric_intake = request.POST.get('caloric_intake')
+
+        # Convert form values to appropriate types
+        vegetarian = dietary_restrictions == 'vegetarian'
+        max_time = {
+            'none': 0,
+            '5_min': 5,
+            '20_min': 20,
+            '1_hour': 60,
+            'more_1_hour': 120
+        }.get(time_restrictions, 0)
+        calories = int(caloric_intake)
+
+        # Save to database
+        existing_restrictions = db_module.get_user_restrictions(username=request.user.username)
+
+        if existing_restrictions is None:
+            db_module.add_user_restrictions(
+                username=request.user.username,
+                vegetarian=vegetarian,
+                calories=calories,
+                max_time=max_time
+            )
+        db_module.update_user_restrictions(
+            username=request.user.username,
+            vegetarian=vegetarian,
+            calories=calories,
+            max_time=max_time
+        )
+
+    return redirect('/YourPalate/home/')
+
+
+@login_required(login_url='/YourPalate/login/')
 def results(request):
     # running the recommender
     similar_users, recommendations, shopping_list = recommender_module.run(username=request.user.username)

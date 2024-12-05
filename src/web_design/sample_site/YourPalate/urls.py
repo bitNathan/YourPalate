@@ -6,9 +6,6 @@ from . import views
 # from django.contrib import admin
 # from django.conf import settings
 
-# TODO maybe adds css and image functionality
-# from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
 urlpatterns = [
     path("home/", views.home, name="home"),
     path("loading/", views.loading, name="loading"),
@@ -18,6 +15,7 @@ urlpatterns = [
     path("login/", views.login_page, name="login"),
     path("signUp/", views.signUp, name="signUp"),
     path("save_preferences/", views.save_preferences, name="save_preferences"),
+    path("save_restrictions/", views.save_restrictions, name="save_restrictions"),
     path("help/", views.help, name="help"),
 ]
 
