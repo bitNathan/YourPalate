@@ -117,7 +117,7 @@ def restrictions(request):
 def results(request):
     # running the recommender
     # TODO get user_id from session (same as username)
-    similar_users, recommendations, shopping_list = recommender_module.run(user_id=request.user.username)
+    similar_users, recommendations, shopping_list = recommender_module.run(username=request.user.username)
 
     # recommendations_data = recommendations.to_dict(orient='records')
 

@@ -290,10 +290,13 @@ def update_new_user_ratings(username, new_ratings):
 
 
 def get_new_user_ratings(username):
+
     user_id = get_user_id_by_username(username)
     if user_id is None:
         print(f"Error: Username {username} does not exist in user_lookup table.")
-        return None
+        # continue with username as user_id
+        # calls in recommender.py pass id directly
+        user_id = username
 
     conn = create_connection()
     try:
