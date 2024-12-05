@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 import pandas as pd
 import json
+from django.http import FileResponse
 
 # from authentication tutorial
 # https://www.geeksforgeeks.org/user-authentication-system-using-django/
@@ -8,8 +9,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-# from .models import *
-
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from django.http import FileResponse
+import io
 
 # importing recommender
 import sys
@@ -31,6 +34,27 @@ questionnaire_module = importlib.util.module_from_spec(spec)
 sys.modules['questionnaire'] = questionnaire_module
 spec.loader.exec_module(questionnaire_module)
 
+def generate_shopping_list_pdf(shopping_list):
+    """Generate a PDF containing the shopping list."""
+
+    buffer = io.BytesIO()
+    pdf = canvas.Canvas(buffer, pagesize=letter)
+    pdf.setFont("Helvetica", 12)
+
+    pdf.drawString(100, 750, "Your Shopping List:")
+    y_position = 730
+    for item in shopping_list:
+        if y_position < 50:
+            pdf.showPage()
+            pdf.setFont("Helvetica", 12)
+            y_position = 750
+        pdf.drawString(100, y_position, f"- {item}")
+        y_position -= 20
+
+    pdf.save()
+    buffer.seek(0)
+
+    return buffer
 
 @login_required(login_url='/YourPalate/login/')
 def home(request):
@@ -98,18 +122,19 @@ def restrictions(request):
 
 @login_required(login_url='/YourPalate/login/')
 def results(request):
-    # running the recommender
-    # TODO get user_id from session (same as username)
+    # Running the recommender
     similar_users, recommendations, shopping_list = recommender_module.run(user_id=23333)
 
-    recommendations_data = recommendations[['name', 'description', 'minutes', 'nutrition']].copy()
-    recommendations_data['calories'] = recommendations_data['nutrition'].apply(
-        lambda x: json.loads(x)[0] if isinstance(x, str) else 0)
-    recommendations_data = recommendations_data[['name', 'description',
-                                                 'minutes', 'calories']].to_dict(orient='records')
+    # Check if the request is for downloading the shopping list PDF
+    if 'download' in request.GET:
+        pdf_buffer = generate_shopping_list_pdf(shopping_list)
 
+        # Serve the PDF file
+        return FileResponse(pdf_buffer, as_attachment=True, filename="shopping_list.pdf")
+
+    # Render the results page
     return render(request, 'results.html', {
-        'recommendations': recommendations_data,
+        'recommendations': recommendations,
         'shopping_list': shopping_list
     })
 

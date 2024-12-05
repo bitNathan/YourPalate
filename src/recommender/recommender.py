@@ -109,7 +109,6 @@ def generate_shopping_list(recipe_details):
             presentable_list.append(ingredient)
 
     presentable_list.sort()
-
     return presentable_list
 
 
@@ -136,9 +135,9 @@ def run(user_id=23333, n_neighbors=100):
     recommended_recipe_ids = get_top_recipes_from_similar_users(ratings, similar_user_ids)
 
     recommendations_list = ", ".join(map(str, recommended_recipe_ids))
-    print(f"Recommendations for user {user_id}: {recommendations_list}")
+    # print(f"Recommendations for user {user_id}: {recommendations_list}")
 
-    print("Fetching recipe details...")
+    # print("Fetching recipe details...")
     # Initialize the database connection
     db_url = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     engine = create_engine(db_url)
@@ -146,14 +145,25 @@ def run(user_id=23333, n_neighbors=100):
     # Fetch details for all recommended recipes
     all_recipe_details_df = fetch_valid_recipes(engine, recommended_recipe_ids)
 
-    print("All recipe details:", all_recipe_details_df)
+    all_recipe_details_df = all_recipe_details_df.sample(frac=1, random_state=42).reset_index(drop=True)
+    
+    first_21 = all_recipe_details_df[:21]
+    
+    recommendations = (
+        first_21[['name', 'description']]
+        .dropna()  # Remove rows with missing values for 'name' or 'description'
+        .to_dict(orient='records')  # Convert to a list of dictionaries
+    )
 
-    print("Generating shopping list...")
-    shopping_list = generate_shopping_list(all_recipe_details_df)
+    # print("All recipe details:", all_recipe_details_df)
 
-    print("Recommendations fetched successfully.")
+    # print("Generating shopping list...")
+    # shopping_list = generate_shopping_list(all_recipe_details_df)
+    shopping_list = generate_shopping_list(first_21[first_21['id'].isin(recommended_recipe_ids)])
 
-    return similar_user_ids, all_recipe_details_df, shopping_list
+    # print("Recommendations fetched successfully.")
+
+    return similar_user_ids, recommendations, shopping_list
 
 
 if __name__ == '__main__':
