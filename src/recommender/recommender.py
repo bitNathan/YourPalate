@@ -54,7 +54,7 @@ def get_similar_users(knn, user_matrix, user_id, n_neighbors=5):
     user_vector_dict = get_new_user_ratings(user_id)
     if (user_vector_dict is None or len(user_vector_dict) == 0):
         print(f"WARNING: User {user_id} not found in user ratings table.")
-        print(f"defaulting to user_id 23333")
+        print("defaulting to user_id 23333")
         user_vector_dict = get_new_user_ratings(23333)
 
     # Convert user_vector_dict to a list of values in the same order as user_matrix columns
