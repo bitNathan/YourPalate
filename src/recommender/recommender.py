@@ -7,11 +7,13 @@ import sys
 from pathlib import Path
 from sqlalchemy import create_engine
 from collections import Counter
+import numpy as np
 
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(project_root))
 
-from src.db import DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT
+from src.db import DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT, get_user_id_by_username
+from src.db import get_new_user_ratings
 
 
 def load_recipe_ratings():
@@ -49,10 +51,11 @@ def create_user_matrix(ratings, expected_features=None):
 
 
 def get_similar_users(knn, user_matrix, user_id, n_neighbors=5):
-    if str(user_id) not in user_matrix.index:
-        raise ValueError(f"User ID {user_id} not found in user ratings.")
+    user_vector_dict = get_new_user_ratings(user_id)
 
-    user_vector = user_matrix.loc[[str(user_id)]]
+    # Convert user_vector_dict to a list of values in the same order as user_matrix columns
+    user_vector = [user_vector_dict.get(str(recipe_id), 0) for recipe_id in user_matrix.columns]
+    user_vector = np.array(user_vector).reshape(1, -1)
 
     distances, indices = knn.kneighbors(user_vector, n_neighbors=n_neighbors)
     similar_user_ids = [user_matrix.index[i] for i in indices[0]]
@@ -139,7 +142,14 @@ def generate_shopping_list(recipe_details):
     return presentable_list
 
 
-def run(user_id=23333, n_neighbors=100):
+def run(username=None, n_neighbors=100):
+    if username is None:
+        user_id = 23333
+    else:
+        user_id = get_user_id_by_username(username)
+    if user_id is None:
+        print(f"WARNING: Username {username} not found in user lookup table.\n  Defaulting to user_id 23333.")
+        user_id = 23333
     project_root = Path(__file__).parent.parent.parent
 
     # print("Loading recipe ratings...")
@@ -196,7 +206,7 @@ def run(user_id=23333, n_neighbors=100):
 if __name__ == '__main__':
     start_time = time.time()
     print("Running the recommender...")
-    similar_users, recommendations, shopping_list = run(user_id=23333)
+    similar_users, recommendations, shopping_list = run(username=None)
     print("Recommendations generated in %s seconds" % (time.time() - start_time))
     print("Similar users:", similar_users)
     print("Recommended recipes:", recommendations)

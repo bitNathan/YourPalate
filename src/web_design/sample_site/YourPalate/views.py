@@ -140,9 +140,8 @@ def restrictions(request):
 
 @login_required(login_url='/YourPalate/login/')
 def results(request):
-
-    # running the recommender\
-    similar_users, recommendations, shopping_list = recommender_module.run(user_id=request.user.username)
+    # running the recommender
+    similar_users, recommendations, shopping_list = recommender_module.run(username=request.user.username)
 
     # Check if the request is for downloading the shopping list PDF
     if 'download' in request.GET:
