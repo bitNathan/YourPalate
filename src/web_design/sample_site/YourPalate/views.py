@@ -144,7 +144,6 @@ def results(request):
     # running the recommender\
     similar_users, recommendations, shopping_list = recommender_module.run(user_id=request.user.username)
 
-
     # Check if the request is for downloading the shopping list PDF
     if 'download' in request.GET:
         pdf_buffer = generate_shopping_list_pdf(shopping_list)
