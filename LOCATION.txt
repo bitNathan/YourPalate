@@ -1,0 +1,1 @@
+http://ec2-18-117-11-214.us-east-2.compute.amazonaws.com/YourPalate/login/
