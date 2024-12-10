@@ -1,4 +1,4 @@
-# YourPalate
+# YourPalate 0.92.0
 
 ## Project Abstract
 Meal planning and grocery shopping can be time-consuming and overwhelming tasks, particularly for college students. To address this, we propose YourPalate. 
